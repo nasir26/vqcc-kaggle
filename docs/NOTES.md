@@ -70,8 +70,33 @@
   script kernel spinwave/vqcc-verify (kaggle/verify_kernel). v1 pushed
   2026-10-27 running the reference submission, empty salt.
 
+**Baseline reproduced (official verifiers, empty salt) — Phase 0 DONE**
+
+| task | env | Q | Toffolis/shot | cost | time |
+|---|---|---|---|---|---|
+| invsqrt | Kaggle | 260 | 7,735 (+1 T, 37 rot @ ε=1.53e-12 → C 7,987.59) | 2,076,774.2337 | 726 s |
+| dqi | Kaggle | 1,893 | 5,725,108.38 (static max 5,725,461) | 24,439,463,583,672.93 | 184 s |
+| dfthcsos | Kaggle | 730 | 93,237 | 3,355,599,588.3155375 | 74 s |
+| dfthcsos | WSL | 730 | 93,237 | 3,355,599,588.3155365 | 171 s |
+
+Geometric mean 1.0. Kaggle vs local dfthcsos differ by 1 ulp-level (3e-16
+rel; numpy/BLAS build) → baseline cache keys now include env.
+- invsqrt worst |err|/tol = 0.477 at x = 2,588,411: >half the phase budget unused.
+- dqi: 0 failures, ε₊ = 8.66e-4, R = 1.19126; mean error weight 31.0 of t = 35;
+  1,893 qubits = 840 syndrome + 1,053 workspace; 49,154 classical bits.
+- dfthcsos: error_2 = 18.64 mHa vs 20 limit (7% headroom), error_1 = 3.19 mHa;
+  ANGLE circuits 119 qubits (12 sel + 96 words + 11 temp) vs cap 128.
+
+**Env**
+- WSL2 Ubuntu 26.04.1 (user `dell`), ~3 GB RAM visible. kickmix.so needs
+  CPython **3.13**, glibc ≥ 2.34. Venv /opt/vqcc/venv (py 3.13.18, numpy 2.5.4,
+  scipy 1.18.1, pandas 3.1.0) via tools/wsl_setup.sh. Kaggle image: py 3.13.15.
+- git lives in WSL only: `wsl -d Ubuntu -u dell -- git -C /mnt/c/Users/dell/Work/vqcc ...`.
+- Run harness locally: `wsl -d Ubuntu -u dell -- bash -c "cd /mnt/c/Users/dell/Work/vqcc && /opt/vqcc/venv/bin/python harness/score.py SUBDIR --tasks ..."`.
+- Kaggle dataset spinwave/vqcc-harness is at the pre-env-key score.py; re-upload
+  (`kaggle datasets version`) before the next Kaggle run.
+
 **Next**
-- Pull vqcc-verify v1 output → record baseline costs → reboot for WSL →
-  git init + first commit → Phase 1 anatomy.
+- Phase 1 anatomy docs (await user go-ahead on ranked plan).
 - Candidate dqi circuits (~0.9 GB) must reach Kaggle as private dataset
   versions; consider generating dqi circuits *inside* the kernel instead.
