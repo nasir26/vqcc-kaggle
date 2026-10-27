@@ -1,0 +1,21 @@
+# Competition data — must not be redistributed (rules §B.4.b)
+data/
+*.kmb
+*.kmx
+*.npz
+*.fcidump
+*.so
+*.pyd
+
+# Staged copy of harness/ for the private Kaggle dataset
+kaggle/harness_ds/harness/
+
+# Packaged submissions
+submissions/
+
+# Environments / build outputs
+.venv/
+__pycache__/
+python_build_kickmix/
+build/
+*.egg-info/

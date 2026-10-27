@@ -1,0 +1,16 @@
+{
+  "id": "spinwave/vqcc-verify",
+  "title": "vqcc-verify",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": ["spinwave/vqcc-harness"],
+  "competition_sources": ["google-verifiable-quantum-circuit-compilation"],
+  "kernel_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a"
+}
