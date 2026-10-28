@@ -90,7 +90,8 @@ qubits = 55.6% of Q) is workspace.
 |---|---|---:|---:|---:|
 | A. Tighten sweep ranges per iteration by **classical reachability analysis** (which slots can be non-zero / be multiplied at iteration `it` over all inputs of weight ≤ 35) | skip provably idle slot multiplies | −10…−30% | 0 | −10…−30% |
 | B. Hoist the control out of the slot multiply: AND q_i with the threshold control once per contiguous run, then uncontrolled 63-Toffoli multiplies | 75 → 63 per slot + 12 per run | −6…−8% | ±0 | −6…−8% |
-| C. Cheaper GF(2¹²) inversion for Chien: tower field GF((2⁶)²) or GF((2⁴)³) — basis changes are linear (free CNOTs); subfield inversion + 3 multiplies | 315 → ~200–250 | −4…−6% | −12…−24 temp | −5…−7% |
+| C. **Tower-field GF arithmetic** GF(((2³)²)²): in-place basis change is a CNOT network (free); multiply 63 → 54 (Karatsuba 2·2·3 = 3·3·6); inverse 315 → ~78 (3 m6 + inv6, inv6 = 3 m3 + inv3, inv3 = 1 m3); division 378 → ~132. Only compute is paid (del_* is MBU: measured 315/63 for init alone, round trip identical) | Chien −970k, quotient divs −218k, sweep mults −292k | **−25…−26%** | −10…−40 temp | **−26% (≈1.35×)** |
+| C′. Lower-rank 6-bit multiply (μ₂(6) = 15, Barbulescu et al. 2012) → m12 = 45 | needs the explicit rank-15 formula (search or literature) | further −8…−10% | | |
 | D. Drop the 3 padding slots / shrink m = n + 3 where the EEA invariant allows | | −1…−3% | −36…−72 | −5…−9% |
 | E. Smaller division scaffold (inverse + in-place multiply, or MBU of the scaffold) at the peak | | ~0 | −12…−30 | −1.3…−3% |
 | F. Merge swap_a_and_b into role-alternating indexing (swap only metadata, alternate which array each sub-step treats as A) | | −4…−7% | 0 | −4…−7% |

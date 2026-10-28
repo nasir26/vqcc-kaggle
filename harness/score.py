@@ -68,38 +68,55 @@ def file_sha256(paths: list[pathlib.Path]) -> str:
 
 
 class Submission:
-    """A submission directory, read and validated with the metric's code."""
+    """A submission directory, read and validated with the metric's code.
+
+    File discovery happens up front (as the metric does); circuits are parsed lazily per task and
+    released with `release(task)`, so a dqi run never holds two ~1 GB circuits at once.
+    """
 
     def __init__(self, root: pathlib.Path, tasks: tuple[str, ...]):
         import metric_vendor as mv
-        from dfthcsos import verify as dfthcsos_verify
-        from dfthcsos.scoreinfra.reference import ORBITALS
-        from dqi import verify_submission_dqi as vdqi
 
         self.root = root.resolve()
-        self.circuits: dict[str, Any] = {}
+        self._circuits: dict[str, Any] = {}
         self.files: dict[str, list[pathlib.Path]] = {}
-
-        def read(path: pathlib.Path, reader: Callable, spec: Any) -> Any:
-            st = path.lstat()  # Same guards as the metric's `read`.
-            if not stat.S_ISREG(st.st_mode) or st.st_nlink > 1 or not path.resolve().is_relative_to(self.root):
-                raise mv.ParticipantVisibleError(f'{path} must be a regular file.')
-            return reader(path, spec)
-
+        self._sha: dict[str, str] = {}
         if 'invsqrt' in tasks:
-            p = mv.find_one(self.root, 'invsqrt.km[xb]', 'invsqrt.kmx or invsqrt.kmb')
-            self.circuits['invsqrt'], self.files['invsqrt'] = read(p, mv.read_circuit, 1), [p]
+            self.files['invsqrt'] = [mv.find_one(self.root, 'invsqrt.km[xb]', 'invsqrt.kmx or invsqrt.kmb')]
         if 'dqi' in tasks:
-            spec = vdqi.ProblemSpecDQI.benchmark_instance()
-            p = mv.find_one(self.root, 'dqi.km[xb]', 'dqi.kmx or dqi.kmb')
-            self.circuits['dqi'], self.files['dqi'] = read(p, mv.read_circuit, spec.n + spec.m), [p]
+            self.files['dqi'] = [mv.find_one(self.root, 'dqi.km[xb]', 'dqi.kmx or dqi.kmb')]
         if 'dfthcsos' in tasks:
             d = mv.find_one(self.root, 'dfthcsos', 'dfthcsos directory', is_dir=True)
             angle = {p.stem: p for p in d.glob('angle_k_*.km[xb]')}
             stems = [f'angle_k_{k}' for k in range(len(angle))]
             if not stems or sorted(angle) != sorted(stems):
                 raise mv.ParticipantVisibleError('dfthcsos/ must hold angle_k_0 ... angle_k_<n-1>, each once.')
-            circuits = [read(angle[s], mv.read_circuit, dfthcsos_verify.QUBIT_CAP) for s in stems]
+            self.files['dfthcsos'] = [angle[s] for s in stems] + [
+                mv.find_one(d, 'submission.npz', 'dfthcsos/submission.npz')]
+
+    def _read(self, path: pathlib.Path, reader: Callable, spec: Any) -> Any:
+        import metric_vendor as mv
+        st = path.lstat()  # Same guards as the metric's `read`.
+        if not stat.S_ISREG(st.st_mode) or st.st_nlink > 1 or not path.resolve().is_relative_to(self.root):
+            raise mv.ParticipantVisibleError(f'{path} must be a regular file.')
+        return reader(path, spec)
+
+    def circuit(self, task: str) -> Any:
+        if task in self._circuits:
+            return self._circuits[task]
+        import metric_vendor as mv
+        from dfthcsos import verify as dfthcsos_verify
+        from dfthcsos.scoreinfra.reference import ORBITALS
+        from dqi import verify_submission_dqi as vdqi
+
+        if task == 'invsqrt':
+            value = self._read(self.files[task][0], mv.read_circuit, 1)
+        elif task == 'dqi':
+            spec = vdqi.ProblemSpecDQI.benchmark_instance()
+            value = self._read(self.files[task][0], mv.read_circuit, spec.n + spec.m)
+        else:
+            *angle_paths, npz_path = self.files[task]
+            circuits = [self._read(p, mv.read_circuit, dfthcsos_verify.QUBIT_CAP) for p in angle_paths]
             npz_spec = {
                 'U': ('f', ('R', 'B', ORBITALS)),
                 'W': ('f', ('R', 'B', 'C')),
@@ -108,14 +125,19 @@ class Submission:
                 'Hsym_lower': ('f', (ORBITALS * (ORBITALS + 1) // 2,)),
                 'tree_edges': ('iu', (ORBITALS - 1, 2)),
             }
-            npz_path = mv.find_one(d, 'submission.npz', 'dfthcsos/submission.npz')
-            npz = read(npz_path, mv.read_npz, npz_spec)
+            npz = self._read(npz_path, mv.read_npz, npz_spec)
             tree = npz.pop('tree_edges')
-            self.circuits['dfthcsos'] = (circuits, npz, tree)
-            self.files['dfthcsos'] = [angle[s] for s in stems] + [npz_path]
+            value = (circuits, npz, tree)
+        self._circuits[task] = value
+        return value
+
+    def release(self, task: str) -> None:
+        self._circuits.pop(task, None)
 
     def sha(self, task: str) -> str:
-        return file_sha256(self.files[task])
+        if task not in self._sha:
+            self._sha[task] = file_sha256(self.files[task])
+        return self._sha[task]
 
 
 def run_verifier(task: str, sub: Submission, salt: str, stress: int, max_workers: int | None) -> dict[str, Any]:
@@ -126,11 +148,11 @@ def run_verifier(task: str, sub: Submission, salt: str, stress: int, max_workers
 
     if task == 'invsqrt':
         spec = vinv.ProblemSpecInvSqrt.for_n_p(10, shots_per_x=vinv.DEFAULT_SHOTS_PER_X * stress)
-        return vinv.verify(sub.circuits['invsqrt'], spec, salt=salt, max_workers=max_workers)
+        return vinv.verify(sub.circuit('invsqrt'), spec, salt=salt, max_workers=max_workers)
     if task == 'dqi':
         spec = vdqi.ProblemSpecDQI.benchmark_instance(num_shots=vdqi.DEFAULT_NUM_SHOTS * stress)
-        return vdqi.verify(sub.circuits['dqi'], spec, salt=salt, max_workers=max_workers)
-    circuits, npz, tree = sub.circuits['dfthcsos']
+        return vdqi.verify(sub.circuit('dqi'), spec, salt=salt, max_workers=max_workers)
+    circuits, npz, tree = sub.circuit('dfthcsos')
     return dfthcsos_verify.verify(circuits, npz, tree, salt=salt,
                                   shots_per_address=dfthcsos_verify.SHOTS_PER_ADDRESS * stress)
 
@@ -211,10 +233,13 @@ def main() -> None:
             except (AssertionError, ValueError, RuntimeError, KeyError) as err:  # The metric's failure set.
                 result, error = None, f'{type(err).__name__}: {err}'
             seconds = time.monotonic() - t0
+            if not same:
+                cand.release(task)  # Never hold candidate and reference circuits at once.
             if result and same:
                 cache[key] = result['score']  # Candidate is the reference: its cost is the baseline.
             if result and key not in cache:
                 cache[key] = run_verifier(task, ref, salt, args.stress, args.max_workers)['score']
+                ref.release(task)
             args.baseline_cache.write_text(json.dumps(cache, indent=2, sort_keys=True))
             row = ledger_row(task, result, error, cand, salt, cache.get(key), params, args.note, args.stress)
             append_ledger(args.ledger, row)

@@ -44,7 +44,17 @@ def mul_roundtrip(b, r, _):
     b.free(t)
 
 
+def inv_init_only(b, r, _):
+    b.init_gf2_inverse_with_scaffold(r[0], field=gf)
+
+
+def mul_init_only(b, r, _):
+    b.init_gf2_mul(r[0], r[1], field=gf)
+
+
 rows = dict([
+    cost('init gf2_inverse_with_scaffold only', inv_init_only, nregs=1),
+    cost('init gf2_mul only', mul_init_only),
     cost('ixor_gf2_mul', lambda b, r, c: b.ixor_gf2_mul(r[0], r[1], target=r[2], field=gf), nregs=3),
     cost('ixor_gf2_mul controlled', lambda b, r, c: b.ixor_gf2_mul(r[0], r[1], target=r[2], field=gf, control=c), nregs=3, extra=1),
     cost('init+del gf2_mul', mul_roundtrip),

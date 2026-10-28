@@ -15,6 +15,13 @@ if (Test-Path $hs) { Remove-Item -Recurse -Force $hs }
 New-Item -ItemType Directory -Force $hs | Out-Null
 Copy-Item harness\*.py $hs
 Copy-Item ledger\baseline_costs.json $hs
+# Generator code, for jobs that build their candidate inside the kernel ("generate").
+Get-ChildItem tasks -Recurse -Filter *.py | ForEach-Object {
+    $rel = $_.FullName.Substring((Resolve-Path tasks).Path.Length + 1)
+    $dst = Join-Path "$hs\tasks" $rel
+    New-Item -ItemType Directory -Force (Split-Path $dst) | Out-Null
+    Copy-Item $_.FullName $dst
+}
 & $k datasets version -p kaggle\harness_ds --dir-mode zip -m $Message
 if (-not $?) { throw "harness dataset version failed" }
 
@@ -23,7 +30,7 @@ $cs = "kaggle\candidates_ds"
 Get-ChildItem $cs -Exclude dataset-metadata.json -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force
 $job = Get-Content $Jobs -Raw | ConvertFrom-Json
 foreach ($j in $job.jobs) {
-    if ($j.submission -ne "REFERENCE") { Copy-Item -Recurse "data\candidates\$($j.submission)" "$cs\$($j.submission)" }
+    if ($j.submission -ne "REFERENCE" -and -not $j.generate) { Copy-Item -Recurse "data\candidates\$($j.submission)" "$cs\$($j.submission)" }
 }
 Copy-Item $Jobs "$cs\job.json"
 $exists = (& $k datasets list -m -s vqcc-candidates) -match "vqcc-candidates"
