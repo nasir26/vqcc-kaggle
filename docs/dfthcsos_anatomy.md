@@ -91,6 +91,23 @@ mHa, 12-bit rounding r ≈ 9.7 mHa.** Consequences:
   (−38% rounding error) → **optimized (non-nearest) rounding** is the enabler.
 - Any shape reduction must be paid for by smarter rounding first.
 
+### Rounding optimisation attempts (2026-10-28) — both failed
+
+- Continuous (unrounded) error_2 = **16.13 mHa** (`round_grad.py`), confirming e₀.
+- `round_opt.py` (per-vector ±1 coordinate descent on ‖decode − u‖², u and −u
+  starts): **no change** (rms vector error 1.11e−3 → 1.11e−3; error_2 identical).
+  Nearest rounding is already a local optimum per vector (Givens Jacobian
+  columns are near-orthogonal, so angle errors act independently).
+- `round_grad.py` (AdaRound-style floor/ceil by d(error_2²)/d(word) with a global
+  quadratic penalty κ): **monotonically worse** — even 0.13% flips (strongest
+  gradients) raise error_2 25.0 → 28.4 mHa at brot 11; 50% flips → 85 mHa. The
+  large-gradient angles belong to large-|w| vectors whose curvature dominates;
+  a per-angle Gauss–Newton curvature would be needed (∼N⁴ per angle) for an
+  upside of only ≈ 1.09×. **Dropped.**
+- Remaining dfthcsos levers: Λ-regularized refit on GPU (starter trainer), or a
+  refit that targets error_2 ≤ ~13 mHa continuous so brot 11 passes with
+  nearest rounding (needs e₀² + 4·r₁₂² ≤ 400 → e₀ ≤ 12.2 mHa).
+
 ## Cost model what-ifs (λ_eff held at 49.30 — **estimates**)
 
 Max J under the cap is ⌊(128 − 12 − 11)/brot⌋.
