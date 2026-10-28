@@ -7,13 +7,11 @@ Usage (WSL): python tasks/dfthcsos/whatif.py data/comp
 import math
 import sys
 
-sys.path += [f'{sys.argv[1]}/kickmix', f'{sys.argv[1]}/verifiers']
-from dfthcsos import verify as V  # noqa: E402
-
 N, LAM, BASE = 76, 49.30136925057438, 3355599588.3155365
 
 
 def model(R, B, C, brot):
+    from dfthcsos import verify as V  # caller puts verifiers/ on sys.path
     h = V.heuristic_costs(N, R, B, C, brot)
     A = N + R * B
     sel = math.ceil(math.log2(A))
@@ -25,9 +23,11 @@ def model(R, B, C, brot):
                 temp=h['temporary_qubits'], ratio_at_fixed_lambda=round(BASE / (LAM * T * Q), 4))
 
 
-print('-- brot (R,B,C = 65,60,60)')
-for brot in (9, 10, 11, 12, 13):
-    print(model(65, 60, 60, brot))
-print('-- shape (brot 12)')
-for R, B, C in ((65, 45, 60), (65, 30, 60), (50, 60, 60), (65, 60, 40), (65, 60, 30), (50, 45, 45)):
-    print(model(R, B, C, 12))
+if __name__ == '__main__':
+    sys.path += [f'{sys.argv[1]}/kickmix', f'{sys.argv[1]}/verifiers']
+    print('-- brot (R,B,C = 65,60,60)')
+    for brot in (9, 10, 11, 12, 13):
+        print(model(65, 60, 60, brot))
+    print('-- shape (brot 12)')
+    for R, B, C in ((65, 45, 60), (65, 30, 60), (50, 60, 60), (65, 60, 40), (65, 60, 30), (50, 45, 45)):
+        print(model(R, B, C, 12))

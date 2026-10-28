@@ -70,6 +70,27 @@ So lower brot is only reachable through a rounding-aware re-quantization (and
 probably a refit) from the float factorization, not by shifting words.
 Rounding also raises E_gap (and λ_eff) through the one-body eigenvalues.
 
+### Correct (rounding-aware) precision sweep — `tasks/dfthcsos/brot_sweep.py`
+
+The starter kit's encoding recomputes the one-body rows as eigenvectors of
+h1′ built from the *rounded* two-body vectors; naive re-rounding (above) skips
+that. Rebuilt on the official verifier functions, it **reproduces the shipped
+12-bit words exactly** (identical metrics):
+
+| brot | error_1 (mHa) | error_2 (mHa) | λ_eff | passes | J | ratio est. (if it passed) |
+|---:|---:|---:|---:|---|---:|---:|
+| 12 | 3.2 | 18.6 | 49.301 | yes | 8 | 1.00 |
+| 11 | 6.5 | 25.0 | 49.319 | no | 9 | 1.09 |
+| 10 | 14.0 | 40.0 | 49.622 | no | 10 | 1.20 |
+
+Modelling error_2² = e₀² + r²·4^(12−brot): **factorization error e₀ ≈ 16.0
+mHa, 12-bit rounding r ≈ 9.7 mHa.** Consequences:
+- At brot 12, e₀ may grow only to √(400 − 93) ≈ 17.5 mHa → R·B reduction by
+  retraining has ~1.5 mHa of room — little.
+- brot 11 needs e₀² + 4r² ≤ 400: with e₀ = 16 that requires r ≤ 6.0 mHa
+  (−38% rounding error) → **optimized (non-nearest) rounding** is the enabler.
+- Any shape reduction must be paid for by smarter rounding first.
+
 ## Cost model what-ifs (λ_eff held at 49.30 — **estimates**)
 
 Max J under the cap is ⌊(128 − 12 − 11)/brot⌋.
