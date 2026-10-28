@@ -1,0 +1,10 @@
+{
+  "jobs": [
+    {"submission": "public_somejoint_2267", "tasks": ["dqi"], "random_salts": 2,
+     "zip_glob": "/kaggle/input/**/quantum-circuits-22-67-local-gm-full-xor-chem/**/submission.zip",
+     "note": "public 22.67 reproduction (somejoint, Apache-2.0), dqi = heliosli v10 889Q decoder, unchanged bytes"},
+    {"submission": "dqi_tower_v1", "generate": ["tasks/dqi/gen_tower.py"], "tasks": ["dqi"], "random_salts": 0,
+     "note": "dqi tower-field GF ops on the reference decoder; static Q 1869 T 4239843"}
+  ],
+  "kernel_sources": ["somejoint/quantum-circuits-22-67-local-gm-full-xor-chem"]
+}

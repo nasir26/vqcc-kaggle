@@ -99,6 +99,31 @@ rel; numpy/BLAS build) → baseline cache keys now include env.
 - Kaggle dataset spinwave/vqcc-harness is at the pre-env-key score.py; re-upload
   (`kaggle datasets version`) before the next Kaggle run.
 
+## 2026-10-28 — public notebooks (decision: study and build on them)
+
+Public LB top 26.14; ≥ 12 teams at 23.7–26.1. Public notebooks publish
+verified 21–22.7 portfolios. User chose to reproduce the best verified public
+one through our harness and improve from there.
+
+**External sources used (record per guardrail):**
+- somejoint/quantum-circuits-22-67-local-gm-full-xor-chem (Agniv Banerjee /
+  SomeJoint), states Apache-2.0. Output `submission.zip` downloaded unchanged
+  to data/public_out/somejoint_22-67 (manifest SHA-256s checked). Its members:
+  invsqrt = busyaprime v8 (dataset busyaprime/33-qcc-v8-members, Apache-2.0),
+  dqi = heliosli v10 (notebook heliosli/the-dataset-is-now-public-now-enjoy,
+  Apache-2.0), chemistry = SomeJoint team (dataset
+  somejoint/qcc-our-chemistry-b143-c60-xor2). Long credit chains in the notebook.
+- Pulled source (read-only, not executed) in data/public/: alexchilton 22.57,
+  busyaprime 22.34, lightningv08 Bezout-Schur, ahmedberatozer DF-THC group
+  compression, rudrabhaskar direct polynomial phasing.
+
+Their claimed (official-verifier, default seed) numbers:
+| task | Q | mean Toffolis | ratio |
+|---|---:|---:|---:|
+| invsqrt | 63 | 1,334.5 (static 1,402) | 20.23 (worst err 0.9993 tol) |
+| dqi | 889 | 440,564 | 58.92 |
+| dfthcsos | 430 | 16,366 (λ_eff 48.764; R8 B143 C60, 8-bit words, 15 five-word lookups) | 9.78 |
+
 ## 2026-10-27/28 — session 1 (Phase 1: anatomy)
 
 - WSL memory raised to 6 GB (+8 GB swap) via %UserProfile%\.wslconfig.

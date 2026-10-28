@@ -37,4 +37,10 @@ $exists = (& $k datasets list -m -s vqcc-candidates) -match "vqcc-candidates"
 if ($exists) { & $k datasets version -p $cs --dir-mode zip -m $Message } else { & $k datasets create -p $cs --dir-mode zip }
 if (-not $?) { throw "candidates dataset upload failed" }
 
+# Other notebooks whose outputs the jobs read (job.json "kernel_sources").
+$metaPath = "kaggle\verify_kernel\kernel-metadata.json"
+$meta = Get-Content $metaPath -Raw | ConvertFrom-Json
+$meta.kernel_sources = @(if ($job.kernel_sources) { $job.kernel_sources } else { @() })
+[IO.File]::WriteAllText((Resolve-Path $metaPath), ($meta | ConvertTo-Json -Depth 5))
+
 & $k kernels push -p kaggle\verify_kernel

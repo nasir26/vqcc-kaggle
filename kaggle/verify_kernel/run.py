@@ -10,7 +10,10 @@ job.json: {"jobs": [{"submission": "invsqrt_lut_best", "tasks": ["invsqrt"], "ra
 A job may instead carry "generate": ["tasks/dqi/gen_tower.py", "--flag", ...]: the script (shipped in
 the harness dataset under tasks/) is run as `python SCRIPT DATA_DIR OUT_DIR ARGS...` with OUT_DIR in
 /tmp (large circuits never land in /kaggle/working), and OUT_DIR is scored.
+A job may instead carry "zip_glob": a glob under /kaggle/input (e.g. another notebook's output, listed
+in kernel_sources) matching one submission.zip, which is extracted to /tmp and scored.
 """
+import zipfile
 import glob
 import json
 import os
@@ -49,7 +52,17 @@ print('python', sys.version.split()[0], '| cpus', os.cpu_count(), '| harness', h
 
 status = 0
 for job in jobs:
-    if 'generate' in job:
+    if 'zip_glob' in job:
+        hits = glob.glob(job['zip_glob'], recursive=True)
+        if len(hits) != 1:
+            print('zip_glob matched', hits, flush=True)
+            status = 1
+            continue
+        sub = f"/tmp/cand/{job['submission']}"
+        with zipfile.ZipFile(hits[0]) as z:
+            z.extractall(sub)
+        print('extracted', hits[0], '->', sub, sorted(os.listdir(sub)), flush=True)
+    elif 'generate' in job:
         sub = f"/tmp/cand/{job['submission']}"
         gen = [sys.executable, str(tasks_src.parent / job['generate'][0]), DATA_DIR, sub, *job['generate'][1:]]
         print('$', ' '.join(gen), flush=True)
