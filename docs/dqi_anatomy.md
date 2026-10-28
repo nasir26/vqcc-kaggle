@@ -97,6 +97,34 @@ qubits = 55.6% of Q) is workspace.
 | G. Accept rare failures (drop support for corner cases): k = 10 failures/102,400 → R 1.19 → 1.23 (+3%) | only pays if it buys > 3% | | | conditional |
 | H. Different decoder (Berlekamp–Massey with in-place σ/B) | storage ≈ 2 × 36 × 12 instead of 876 + 36? needs analysis of reversibility overhead | ? | potentially −400…−800 | **up to 1.5–2.5×** — high effort |
 
+## Berlekamp–Massey rewrite (idea H) — analysis, 2026-10-28: **not recommended**
+
+- arXiv:2510.10967 (the reference's paper) states its EEA layout reaches "the
+  theoretical minimum of 2nb qubits" at leading order: 2·70·12 = **1,680**. The
+  reference uses 1,893, so only **≈ 213 qubits** sit above that floor
+  (3 padding slots/array ×2 = 72, metadata 51, peak temp 90). Max Q² gain from
+  *any* layout change at that floor: (1,893/1,680)² = **1.27×**.
+- Reversible BM is worse in space: the update σ ← σ − (Δ/b)·x·B is invertible
+  only with Δ_r and the branch bit, and Δ_r cannot be recomputed from σ^(r+1)
+  (the new σ has zero discrepancy by construction). Keeping the history costs
+  ≈ 2t·(12 + 1) = 910 qubits on top of S (840) + σ (432) + B (432) ≈ 2,600 >
+  1,893. riBM/inversion-free variants need ≈ 2·(3t + 1) coefficient slots
+  (≈ 2,500 qubits).
+- Measurement-based uncomputation of σ/history after the Forney phase does not
+  help: the fixup is a phase oracle of a non-linear function of S, i.e. another
+  full decoder pass.
+- **Conclusion:** stay with the synchronized EEA and attack the 213-qubit
+  overhead (ideas D, E: ≤ 1.27× on Q²) and the Toffoli sinks (A, B, C, F).
+  Revisit only if a reversible BM with O(1) words of history is found.
+- arXiv:2610.22367 (Gu, Kemeny, Yelin, Lukin, "Discovering state-of-the-art
+  quantum circuits with large language models"): abstract does not cover RS or
+  GF(2^m), but reports a reversible **divsteps** (Bernstein–Yang) architecture
+  for prime-field inversion. Polynomial divsteps over GF(2^m)[x] has a fixed,
+  uniform step (conditional swap + scaled elimination + shift); it might replace
+  the reference's "execute all 4 sub-step circuits every iteration" overhead.
+  Each step loses g(0) unless kept (12 bits × ~2·70 steps), so reversibility
+  needs the same care. **To read in full before dqi work starts.**
+
 Dev loop: build 28 s, 1.76 GB locally (fine in WSL); **verification only on
 Kaggle** (~3 min with 4 workers; ~0.9 GB circuit upload per candidate as a
 private dataset version, or generate inside the kernel from our generator
