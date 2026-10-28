@@ -7,8 +7,10 @@ data/
 *.so
 *.pyd
 
-# Staged copy of harness/ for the private Kaggle dataset
+# Staged copies for the private Kaggle datasets
 kaggle/harness_ds/harness/
+kaggle/candidates_ds/*
+!kaggle/candidates_ds/dataset-metadata.json
 
 # Packaged submissions
 submissions/

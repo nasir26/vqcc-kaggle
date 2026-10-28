@@ -1,10 +1,15 @@
-"""Kaggle script kernel: run harness/score.py on a submission inside the official image.
+"""Kaggle script kernel: run harness/score.py on candidate submissions inside the official image.
 
-The harness comes from the private dataset spinwave/vqcc-harness; the competition data (kickmix.so,
-verifiers/, sample_submission/) from the competition mount. Outputs land in /kaggle/working/vqcc/ledger.
-Edit SUBMISSION / EXTRA_ARGS before pushing (tools/kaggle_verify.ps1 does this).
+Inputs (all private): dataset spinwave/vqcc-harness (harness/*.py + baseline_costs.json) and dataset
+spinwave/vqcc-candidates (candidate submission dirs + job.json). Without job.json the reference
+submission is scored (baseline reproduction). Outputs land in /kaggle/working/vqcc/ledger.
+
+job.json: {"jobs": [{"submission": "invsqrt_lut_best", "tasks": ["invsqrt"], "random_salts": 2,
+                     "note": "..."}]}
+"submission" is a directory name inside the candidates dataset, or "REFERENCE".
 """
 import glob
+import json
 import os
 import pathlib
 import shutil
@@ -12,17 +17,34 @@ import subprocess
 import sys
 
 SLUG = 'google-verifiable-quantum-circuit-compilation'
-SUBMISSION = f'/kaggle/input/competitions/{SLUG}/sample_submission'
-EXTRA_ARGS = ['--note', 'kaggle baseline reproduction']
+REFERENCE = f'/kaggle/input/competitions/{SLUG}/sample_submission'
+
+
+def find_dir_with(name: str) -> pathlib.Path | None:
+    hits = glob.glob(f'/kaggle/input/**/{name}', recursive=True)
+    return pathlib.Path(hits[0]).parent if hits else None
+
 
 harness_src = next(pathlib.Path(p).parent for p in glob.glob('/kaggle/input/**/score.py', recursive=True)
                    if (pathlib.Path(p).parent / 'metric_vendor.py').exists())
 work = pathlib.Path('/kaggle/working/vqcc')
 shutil.copytree(harness_src, work / 'harness', dirs_exist_ok=True)
 (work / 'ledger').mkdir(parents=True, exist_ok=True)
+if (harness_src / 'baseline_costs.json').exists():
+    shutil.copy(harness_src / 'baseline_costs.json', work / 'ledger' / 'baseline_costs.json')
 
-print('python', sys.version.split()[0], '| cpus', os.cpu_count(), '| harness', harness_src, flush=True)
-print('submission', SUBMISSION, sorted(os.listdir(SUBMISSION)), flush=True)
-cmd = [sys.executable, str(work / 'harness' / 'score.py'), SUBMISSION, *EXTRA_ARGS]
-print('$', ' '.join(cmd), flush=True)
-sys.exit(subprocess.run(cmd, cwd=work).returncode)
+cand_root = find_dir_with('job.json')
+jobs = (json.loads((cand_root / 'job.json').read_text())['jobs'] if cand_root else
+        [{'submission': 'REFERENCE', 'tasks': ['invsqrt', 'dqi', 'dfthcsos'], 'random_salts': 0,
+          'note': 'kaggle baseline reproduction'}])
+print('python', sys.version.split()[0], '| cpus', os.cpu_count(), '| harness', harness_src,
+      '| candidates', cand_root, flush=True)
+
+status = 0
+for job in jobs:
+    sub = REFERENCE if job['submission'] == 'REFERENCE' else str(cand_root / job['submission'])
+    cmd = [sys.executable, str(work / 'harness' / 'score.py'), sub, '--tasks', *job['tasks'],
+           '--salt', '', '--random-salts', str(job.get('random_salts', 0)), '--note', job.get('note', '')]
+    print('$', ' '.join(cmd), flush=True)
+    status |= subprocess.run(cmd, cwd=work).returncode
+sys.exit(status)

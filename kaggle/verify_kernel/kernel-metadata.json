@@ -8,7 +8,7 @@
   "enable_gpu": false,
   "enable_tpu": false,
   "enable_internet": false,
-  "dataset_sources": ["spinwave/vqcc-harness"],
+  "dataset_sources": ["spinwave/vqcc-harness", "spinwave/vqcc-candidates"],
   "competition_sources": ["google-verifiable-quantum-circuit-compilation"],
   "kernel_sources": [],
   "model_sources": [],
