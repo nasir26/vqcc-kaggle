@@ -124,6 +124,22 @@ Their claimed (official-verifier, default seed) numbers:
 | dqi | 889 | 440,564 | 58.92 |
 | dfthcsos | 430 | 16,366 (λ_eff 48.764; R8 B143 C60, 8-bit words, 15 five-word lookups) | 9.78 |
 
+**Our reproduction of the public 22.67 (harness, empty salt):** dfthcsos
+9.778170 (cost 343,172,572.78) and invsqrt 20.228799 (cost 102,664.24) — exact
+match, local WSL. dqi pending on Kaggle v3 (job public_somejoint_2267_dqi.json).
+
+**Superseded own work:**
+- invsqrt LUT-NR: officially verified 1.7444 (3 salts, Kaggle) — public 63-qubit
+  circuit is 20.23.
+- dqi tower-field GF (mul 54, inv 77): public Schur decoder (jday96314/QuantumAI
+  on GitHub, rebuilt by alexchilton) already runs on a **42-AND** GF(2¹²)
+  multiplier and a tower inverse. Only lever there: a < 42-AND multiplier.
+- dfthcsos GPU refit of the 65/60/60 baseline (kernel spinwave/vqcc-dfthc-train v1,
+  2×GPU, ~100 ms/epoch): failed — eps 16.8/rho 1e-4 → λ_eff 50.86 (worse);
+  rho 1e-3 → λ_eff 49.03 at ε_fro 19.9 mHa (no rounding room); epoch-0 error
+  197 mHa (seed/frozen-shift mismatch) and late divergence (122 mHa at ep 19,990).
+  Obsolete anyway vs the public R8 B143 factor.
+
 ## 2026-10-27/28 — session 1 (Phase 1: anatomy)
 
 - WSL memory raised to 6 GB (+8 GB swap) via %UserProfile%\.wslconfig.
