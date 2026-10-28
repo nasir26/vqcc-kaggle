@@ -1,5 +1,8 @@
 # NOTES — findings log
 
+> **Moving machines?** Read `HANDOFF.md` at the repo root first (state, setup,
+> Kaggle resources, findings, next steps). Snapshot: 2026-10-28.
+
 ## 2026-10-27 — session 1 (Phase 0, partial)
 
 **Environment**

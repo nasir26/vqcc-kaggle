@@ -1,0 +1,6 @@
+{
+  "jobs": [
+    {"submission": "dqi_tower_v1", "generate": ["tasks/dqi/gen_tower.py"], "tasks": ["dqi"], "random_salts": 2,
+     "note": "dqi tower-field GF ops (mul 54, inv 77, div 131); static Q 1869 T 4239843"}
+  ]
+}

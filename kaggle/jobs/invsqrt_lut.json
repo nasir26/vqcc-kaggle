@@ -1,0 +1,8 @@
+{
+  "jobs": [
+    {"submission": "invsqrt_lut_best", "tasks": ["invsqrt"], "random_salts": 2,
+     "note": "LUT-NR a7 wc16 d7 sq27 pr27 res27 free_c1 (model 0.998 tol)"},
+    {"submission": "invsqrt_lut_safe", "tasks": ["invsqrt"], "random_salts": 2,
+     "note": "LUT-NR a7 wc16 d7 sq27 pr27 res28 free_c1 (model 0.903 tol)"}
+  ]
+}
