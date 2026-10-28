@@ -96,7 +96,28 @@ rel; numpy/BLAS build) → baseline cache keys now include env.
 - Kaggle dataset spinwave/vqcc-harness is at the pre-env-key score.py; re-upload
   (`kaggle datasets version`) before the next Kaggle run.
 
-**Next**
-- Phase 1 anatomy docs (await user go-ahead on ranked plan).
+## 2026-10-27/28 — session 1 (Phase 1: anatomy)
+
+- WSL memory raised to 6 GB (+8 GB swap) via %UserProfile%\.wslconfig.
+- Fixed venv: interpreter now under /opt/vqcc/python (was in /root → exit 126
+  for user dell).
+- docs/invsqrt_anatomy.md: 88.5% of Toffolis are multiplications, half of all
+  Toffolis are the mirror uncompute; 231/260 qubits are named registers live
+  for the whole circuit; error 0.477 of tolerance.
+- docs/dfthcsos_anatomy.md: ANGLES = 85% of T ∝ K·(N+R·B); inner-prep temp
+  544 = 75% of Q (model-chosen); Λ_h2 = 96% of Λ. Model reproduces baseline
+  score exactly. Shipped 12-bit words are rounding-aware (naive 11-bit
+  re-rounding → error_1 221 mHa) — lower brot needs re-quantization.
+- docs/dqi_anatomy.md: EEA sweep 50% of T (controlled 75-Toffoli GF mults on
+  73 slots × 444 iterations), Chien inversions 22.5% (4,095 × 315), polynomial
+  storage 92.5% of Q (workspace 1,053 = 55.6%). gf2_phase_by_product and
+  constant multiplies are Clifford (0 Toffolis).
+- Attribution method that works with kickmix (no per-mark stats API):
+  rebuild stages alone on the reference's exact layout (invsqrt) or replace one
+  subroutine by a no-op and diff (dqi).
+
+**Next best bet**: invsqrt idea B (precision sweep on the exact
+fixed_point_model; no simulation needed to screen) + idea A (MBU uncompute),
+then dfthcsos refit after downloading the starter-kit trainer.
 - Candidate dqi circuits (~0.9 GB) must reach Kaggle as private dataset
   versions; consider generating dqi circuits *inside* the kernel instead.
