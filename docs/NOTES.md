@@ -184,3 +184,13 @@ then dfthcsos refit after downloading the starter-kit trainer.
   Lambda = lam_h1 + lam_h2, lam_h2 = 291.7 on the best public factor. Replacing sum|w_b| by the nuclear norm of
   each X_rc (best possible re-representation of the same X) only saves 4.2%: real gains need a new
   factorization (CPU optimisation on this host; no GPU).
+- Submitted v1 to Kaggle 2026-10-29 (user approved): submissions/2026-10-29_v1.zip, sha e6f49334...
+- somejoint's 22.75 notebook embeds the full generator of the 897-qubit dqi decoder (Apache-2.0, `SOURCES` dict;
+  extracted as text to data/public/somejoint__.../src). Its GF(2^12) multiplier `tensor(12)` is evaluation/
+  interpolation over GF(8) (degree 4, 7 points incl. infinity, 6-AND GF(8) products): rank 42, symmetric masks.
+  Running that external code on this host is blocked by the permission system until the user allows it.
+- tasks/dqi/flipgraph.c: own flip-graph search (Kauers–Moosbauer) for GF(2^n) multiplication schemes; every
+  improvement verified against the full tensor. Validation: GF(2^4) reaches 9 (optimum), GF(2^6) reaches the
+  known optimum 15 in 14 of 64 long walks. Launched GF(2^12), modulus 4179, target <= 41, 200 seeds x 3 h
+  (data/fg12/). Value if found: every multiplier in the decoder is 42 ANDs, so rank r gives about
+  (42 - r)/42 of the multiplier's share of dqi Toffolis (share still to be measured).
