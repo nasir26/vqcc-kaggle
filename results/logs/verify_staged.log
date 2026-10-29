@@ -1,0 +1,27 @@
+=== data/candidates/pub_dfthcsos_0d04444c (busyaprime__lb-22-72431-22x-cheaper-than-google-s-circuits)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341880855.4426008, "ref_cost": 3355599588.3155365, "ratio": 9.815114051856924, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dfthcsos_278ba659 (leoprovorov__but-some-q-squared-width-lab,somejoint__quantum-circuits-22-75-local-gm-897-qubit-dqi)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341375166.66254705, "ref_cost": 3355599588.3155365, "ratio": 9.82965346050664, "seconds": 14.3, "error": null}
+=== data/candidates/pub_dfthcsos_2d06fc97 (atakanaldemir__quantum-circuits-iso-gap-dqi-h5)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341135130.394919, "ref_cost": 3355599588.3155365, "ratio": 9.83656999626772, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dfthcsos_7bfdb118 (gedouluhui__qcc-heliosli-v12-22-7003-local-gm-verified-fork)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341914455.0768369, "ref_cost": 3355599588.3155365, "ratio": 9.814149529189832, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dfthcsos_7f3452e9 (zongaobian__quantum-circuits-signed-digits-bm-psi-qrom)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 343477342.01019543, "ref_cost": 3355599588.3155365, "ratio": 9.769493290814893, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dfthcsos_866aecf9 (avazaku__slack-homotopy-897-qubit-dqi)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341342227.7452543, "ref_cost": 3355599588.3155365, "ratio": 9.830602004566046, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dfthcsos_ee1619fc (kirilltym__quantum-circuits-exact-gauge-5-word-qrom)
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341133443.83596337, "ref_cost": 3355599588.3155365, "ratio": 9.836618628131642, "seconds": 14.2, "error": null}
+=== data/candidates/pub_dqi_809a8111 (atakanaldemir__quantum-circuits-iso-gap-dqi-h5)
+{"salt": "", "task": "dqi", "pass": true, "cost": 414004704471.34515, "ref_cost": 24439463583672.93, "ratio": 59.03184992760023, "seconds": 14.7, "error": null}
+=== data/candidates/pub_dqi_9c9e1cb1 (busyaprime__lb-22-72431-22x-cheaper-than-google-s-circuits,gedouluhui__qcc-heliosli-v12-22-7003-local-gm-verified-fork)
+{"salt": "", "task": "dqi", "pass": true, "cost": 414781342770.7355, "ref_cost": 24439463583672.93, "ratio": 58.9213184479744, "seconds": 18.6, "error": null}
+=== data/candidates/pub_dqi_c300b06e (avazaku__slack-homotopy-897-qubit-dqi,kirilltym__quantum-circuits-exact-gauge-5-word-qrom,leoprovorov__but-some-q-squared-width-lab,somejoint__quantum-circuits-22-75-local-gm-897-qubit-dqi)
+{"salt": "", "task": "dqi", "pass": true, "cost": 412943252615.63153, "ref_cost": 24439463583672.93, "ratio": 59.1835886138603, "seconds": 17.9, "error": null}
+=== data/candidates/pub_dqi_e2a3d42a (zongaobian__quantum-circuits-signed-digits-bm-psi-qrom)
+{"salt": "", "task": "dqi", "pass": true, "cost": 434760235127.86896, "ref_cost": 24439463583672.93, "ratio": 56.21365895269825, "seconds": 11.8, "error": null}
+=== data/candidates/pub_invsqrt_80261936 (atakanaldemir__quantum-circuits-iso-gap-dqi-h5,avazaku__slack-homotopy-897-qubit-dqi,gedouluhui__qcc-heliosli-v12-22-7003-local-gm-verified-fork,somejoint__quantum-circuits-22-75-local-gm-897-qubit-dqi,zongaobian__quantum-circuits-signed-digits-bm-psi-qrom)
+{"salt": "", "task": "invsqrt", "pass": true, "cost": 102664.23957721348, "ref_cost": 2076774.233715282, "ratio": 20.228798676810403, "seconds": 21.9, "error": null}
+=== data/candidates/pub_invsqrt_e623b659 (busyaprime__lb-22-72431-22x-cheaper-than-google-s-circuits,kirilltym__quantum-circuits-exact-gauge-5-word-qrom,leoprovorov__but-some-q-squared-width-lab)
+{"salt": "", "task": "invsqrt", "pass": true, "cost": 102349.2360480486, "ref_cost": 2076774.233715282, "ratio": 20.291057499836395, "seconds": 21.7, "error": null}
+ALL_DONE

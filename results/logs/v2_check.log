@@ -1,0 +1,36 @@
+{"salt": "", "task": "invsqrt", "pass": true, "cost": 102349.2360480486, "ref_cost": 2076774.233715282, "ratio": 20.291057499836395, "seconds": 12.7, "error": null}
+{"salt": "", "task": "dqi", "pass": true, "cost": 412943252615.63153, "ref_cost": 24439463583672.93, "ratio": 59.1835886138603, "seconds": 18.9, "error": null}
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.9, "error": null}
+{"salt": "e4f8d0caf1ed52eb178fc510b05548c1", "task": "invsqrt", "pass": true, "cost": 102349.20506999808, "ref_cost": 2076774.233715282, "ratio": 20.291063641334066, "seconds": 14.6, "error": null}
+{"salt": "e4f8d0caf1ed52eb178fc510b05548c1", "task": "dqi", "pass": true, "cost": 412943209071.3264, "ref_cost": 24439466832062.38, "ratio": 59.18360272112145, "seconds": 19.2, "error": null}
+{"salt": "e4f8d0caf1ed52eb178fc510b05548c1", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 14.0, "error": null}
+{"salt": "87f8e564422d598f44d122089e131f24", "task": "invsqrt", "pass": true, "cost": 102349.22389545698, "ref_cost": 2076774.233715282, "ratio": 20.29105990912614, "seconds": 13.2, "error": null}
+{"salt": "87f8e564422d598f44d122089e131f24", "task": "dqi", "pass": true, "cost": 412943537188.7105, "ref_cost": 24439468002653.168, "ratio": 59.1835585296607, "seconds": 17.4, "error": null}
+{"salt": "87f8e564422d598f44d122089e131f24", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.9, "error": null}
+{"salt": "79e188f45261d4c0f67c121e9dba07d0", "task": "invsqrt", "pass": true, "cost": 102349.21091947734, "ref_cost": 2076774.233715282, "ratio": 20.291062481655793, "seconds": 13.0, "error": null}
+{"salt": "79e188f45261d4c0f67c121e9dba07d0", "task": "dqi", "pass": true, "cost": 412943225245.9952, "ref_cost": 24439463203230.926, "ratio": 59.183591615220344, "seconds": 18.8, "error": null}
+{"salt": "79e188f45261d4c0f67c121e9dba07d0", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.8, "error": null}
+{"salt": "3420c216100ec9a5d6cd5e0ab3699371", "task": "invsqrt", "pass": true, "cost": 102349.20982686247, "ref_cost": 2076774.233715282, "ratio": 20.29106269827023, "seconds": 12.9, "error": null}
+{"salt": "3420c216100ec9a5d6cd5e0ab3699371", "task": "dqi", "pass": true, "cost": 412943191249.2376, "ref_cost": 24439464724998.953, "ratio": 59.1836001728581, "seconds": 19.5, "error": null}
+{"salt": "3420c216100ec9a5d6cd5e0ab3699371", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 14.0, "error": null}
+{"salt": "fa828a0057cb3b3687a2627adcab1dcc", "task": "invsqrt", "pass": true, "cost": 102349.22795145198, "ref_cost": 2076774.233715282, "ratio": 20.29105910501223, "seconds": 14.6, "error": null}
+{"salt": "fa828a0057cb3b3687a2627adcab1dcc", "task": "dqi", "pass": true, "cost": 412943426268.6728, "ref_cost": 24439475889508.63, "ratio": 59.18359352597517, "seconds": 19.3, "error": null}
+{"salt": "fa828a0057cb3b3687a2627adcab1dcc", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.9, "error": null}
+{"salt": "e592b748d943786cdd004477d6b50a27", "task": "invsqrt", "pass": true, "cost": 102349.24364043392, "ref_cost": 2076774.233715282, "ratio": 20.29105599462227, "seconds": 13.9, "error": null}
+{"salt": "e592b748d943786cdd004477d6b50a27", "task": "dqi", "pass": true, "cost": 414839725944.8548, "ref_cost": 24439469392729.734, "ratio": 58.91304005918302, "seconds": 17.7, "error": null}
+{"salt": "e592b748d943786cdd004477d6b50a27", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.8, "error": null}
+{"salt": "efb557fbe3b4b88f6de8310a2761f8fe", "task": "invsqrt", "pass": true, "cost": 102349.20286749005, "ref_cost": 2076774.233715282, "ratio": 20.291064077988473, "seconds": 13.0, "error": null}
+{"salt": "efb557fbe3b4b88f6de8310a2761f8fe", "task": "dqi", "pass": true, "cost": 412943409476.22156, "ref_cost": 24439469129346.805, "ratio": 59.183579562017684, "seconds": 17.2, "error": null}
+{"salt": "efb557fbe3b4b88f6de8310a2761f8fe", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.9, "error": null}
+{"salt": "2befe0ef0b0fb1423297c47dc2c9f567", "task": "invsqrt", "pass": true, "cost": 102349.30925638639, "ref_cost": 2076774.233715282, "ratio": 20.291042986063882, "seconds": 14.7, "error": null}
+{"salt": "2befe0ef0b0fb1423297c47dc2c9f567", "task": "dqi", "pass": true, "cost": 416453893064.6182, "ref_cost": 24439473358106.043, "ratio": 58.684703793401546, "seconds": 19.2, "error": null}
+{"salt": "2befe0ef0b0fb1423297c47dc2c9f567", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 13.7, "error": null}
+{"salt": "", "geometric_mean": 22.785356797276837, "note": null}
+{"salt": "e4f8d0caf1ed52eb178fc510b05548c1", "geometric_mean": 22.785360906498564, "note": null}
+{"salt": "87f8e564422d598f44d122089e131f24", "geometric_mean": 22.78535383834348, "note": null}
+{"salt": "79e188f45261d4c0f67c121e9dba07d0", "geometric_mean": 22.785359047183995, "note": null}
+{"salt": "3420c216100ec9a5d6cd5e0ab3699371", "geometric_mean": 22.785360226479174, "note": null}
+{"salt": "fa828a0057cb3b3687a2627adcab1dcc", "geometric_mean": 22.785358028487156, "note": null}
+{"salt": "e592b748d943786cdd004477d6b50a27", "geometric_mean": 22.75058329151101, "note": null}
+{"salt": "efb557fbe3b4b88f6de8310a2761f8fe", "geometric_mean": 22.785358097899227, "note": null}
+{"salt": "2befe0ef0b0fb1423297c47dc2c9f567", "geometric_mean": 22.721148001695852, "note": null}

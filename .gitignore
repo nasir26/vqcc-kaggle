@@ -16,8 +16,11 @@ kaggle/candidates_ds/*
 submissions/
 
 # Environments / build outputs
-.venv/
+.venv
 __pycache__/
 python_build_kickmix/
 build/
 *.egg-info/
+
+# Kaggle's metric notebook, vendored locally by tools/fetch_all.sh (no licence to redistribute)
+harness/metric_vendor.py

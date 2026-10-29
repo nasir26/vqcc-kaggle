@@ -1,0 +1,4 @@
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 3355599588.3155365, "ref_cost": 3355599588.3155365, "ratio": 1.0, "seconds": 45.4, "error": null}
+{"salt": "", "task": "invsqrt", "pass": true, "cost": 2076774.233715282, "ref_cost": 2076774.233715282, "ratio": 1.0, "seconds": 28.2, "error": null}
+{"salt": "", "task": "dqi", "pass": true, "cost": 24439463583672.93, "ref_cost": 24439463583672.93, "ratio": 1.0, "seconds": 26.5, "error": null}
+{"salt": "", "geometric_mean": 1.0, "note": null}

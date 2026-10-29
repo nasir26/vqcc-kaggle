@@ -1,8 +1,5 @@
 # NOTES — findings log
 
-> **Moving machines?** Read `HANDOFF.md` at the repo root first (state, setup,
-> Kaggle resources, findings, next steps). Snapshot: 2026-10-28.
-
 ## 2026-10-27 — session 1 (Phase 0, partial)
 
 **Environment**
@@ -192,7 +189,7 @@ then dfthcsos refit after downloading the starter-kit trainer.
 - tasks/dqi/flipgraph.c: own flip-graph search (Kauers–Moosbauer) for GF(2^n) multiplication schemes; every
   improvement verified against the full tensor. Validation: GF(2^4) reaches 9 (optimum), GF(2^6) reaches the
   known optimum 15 in 14 of 64 long walks. Launched GF(2^12), modulus 4179, target <= 41, 200 seeds x 3 h
-  (data/fg12/). Value if found: every multiplier in the decoder is 42 ANDs, so rank r gives about
+  (results/dqi/fg12/). Value if found: every multiplier in the decoder is 42 ANDs, so rank r gives about
   (42 - r)/42 of the multiplier's share of dqi Toffolis (share still to be measured).
 - v1 public LB score 22.77459 (2026-10-29): equals our local salt-'' value with dqi at 0 failures, so the harness predicts the LB exactly.
 - Literature/forum sweep 2026-10-29 (forum threads saved in data/forum/, via KaggleApi.competition_list_topic_messages):
@@ -209,7 +206,7 @@ then dfthcsos refit after downloading the starter-kit trainer.
 - Automorphism angle: tasks/dqi/flipsym.c searches Frobenius-invariant schemes in a normal basis (Frobenius =
   cyclic coordinate shift), every move applied per orbit. GF(2^6): reaches the optimum 15 in 90 s under groups of
   order 2, 3 and 6 (plain flip graph: 14/64 runs in 180 s). GF(2^12): 48 walks x groups of order 2,3,4,6,12,
-  3 h, target <= 41 (data/fs12/). Plain flip graph from the rank-42 scheme found nothing below 42.
+  3 h, target <= 41 (results/dqi/fs12/). Plain flip graph from the rank-42 scheme found nothing below 42.
 - dqi attribution (tasks/dqi/attribute_somejoint.py, user allowed running the public generator): somejoint 897Q,
   T_static 444,667, 480,015 AND-type calls. GF(2^12) tensor(12) multipliers (rank 42): field.mul_xor0 37.5% +
   field.mul_xor 2.7% (+ part of noscratch.rankone_xor 10.0%). GF(2^24) multiplier mul99 (degree 6 over GF(16),

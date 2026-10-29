@@ -1,0 +1,25 @@
+=== data/candidates/glz_open_circuits
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 521447039.312322, "ref_cost": 3355599588.3155365, "ratio": 6.4351685508481555, "seconds": 24.8, "error": null}
+=== data/candidates/glz_open_circuits_v21
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 424162731.16995364, "ref_cost": 3355599588.3155365, "ratio": 7.911113687569627, "seconds": 19.3, "error": null}
+=== data/candidates/glz_open_circuits_v22
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 389636552.06586975, "ref_cost": 3355599588.3155365, "ratio": 8.612127303057179, "seconds": 17.3, "error": null}
+=== data/candidates/glz_open_circuits_v23
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 383267019.2215811, "ref_cost": 3355599588.3155365, "ratio": 8.755252656831237, "seconds": 23.4, "error": null}
+=== data/candidates/glz_open_circuits_v24
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 377049552.6117826, "ref_cost": 3355599588.3155365, "ratio": 8.899624903601266, "seconds": 23.6, "error": null}
+=== data/candidates/glz_open_circuits_v25
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 355065066.0799457, "ref_cost": 3355599588.3155365, "ratio": 9.450661044643567, "seconds": 23.2, "error": null}
+=== data/candidates/glz_open_circuits_v26
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 344812530.9004197, "ref_cost": 3355599588.3155365, "ratio": 9.731663694335454, "seconds": 21.8, "error": null}
+=== data/candidates/glz_open_circuits_v27
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 342695987.44337285, "ref_cost": 3355599588.3155365, "ratio": 9.791767955468158, "seconds": 21.9, "error": null}
+=== data/candidates/glz_open_circuits_v28
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 342695987.44337285, "ref_cost": 3355599588.3155365, "ratio": 9.791767955468158, "seconds": 20.5, "error": null}
+=== data/candidates/glz_open_circuits_v29
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 341439616.9651496, "ref_cost": 3355599588.3155365, "ratio": 9.827798010498704, "seconds": 16.4, "error": null}
+=== data/candidates/glz_open_circuits_v29_w30
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 340990159.68148416, "ref_cost": 3355599588.3155365, "ratio": 9.840751977857577, "seconds": 22.4, "error": null}
+=== data/candidates/glz_open_circuits_v33_w34
+{"salt": "", "task": "dfthcsos", "pass": true, "cost": 340650168.69315076, "ref_cost": 3355599588.3155365, "ratio": 9.850573687336635, "seconds": 19.5, "error": null}
+ALL_DONE
