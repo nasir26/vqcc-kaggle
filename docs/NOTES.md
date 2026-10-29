@@ -165,3 +165,22 @@ fixed_point_model; no simulation needed to screen) + idea A (MBU uncompute),
 then dfthcsos refit after downloading the starter-kit trainer.
 - Candidate dqi circuits (~0.9 GB) must reach Kaggle as private dataset
   versions; consider generating dqi circuits *inside* the kernel instead.
+
+## 2026-10-29 — session on the new host (Ubuntu 20.04, 256 cores, 503 GB)
+
+- Runtime: host glibc 2.31 < kickmix.so's GLIBC_2.34/GLIBCXX_3.4.32. `tools/host_runtime.sh` unpacks Ubuntu
+  24.04 libc6 2.39 + libstdc++6 14 into ../rt/lib and patches a private CPython 3.13.18 (interpreter + RPATH),
+  so fork and spawn workers both load the official kickmix.so. All three reference costs reproduce exactly
+  (dfthcsos 3355599588.3155365, invsqrt 2076774.233715282, dqi 24439463583672.93); full run ~100 s (dqi local).
+- Frontier refresh: LB top 26.14113 (Breaking1800, unchanged since 10-28 04:40); ranks 3-7 at 24.56-24.92.
+  Public composites: somejoint 22.75 (897Q dqi), busyaprime 22.72, heliosli v12 22.70.
+- `tools/scan_public.py` staged 13 distinct public task members from 12 notebook outputs; all PASS in our
+  harness (salt ''), matching their published numbers. Best per task: invsqrt e623b659 20.291057
+  (busyaprime/kirilltym/leoprovorov), dqi c300b06e 59.183589 (somejoint 897Q and others), dfthcsos ee1619fc
+  9.836619 (kirilltym exact gauge). Sources: Kaggle notebook outputs, Apache-2.0 per competition rules.
+- portfolio_v1 = those three: PASS on salt '' + 5 random salts; GM 22.7746 (dqi 0 failures, 2 salts) or 22.7398
+  (dqi 1 failure, 4 salts). Packaged as submissions/2026-10-29_v1.zip, awaiting human approval to upload.
+- dfthcsos analysis: E_gap is already at its floor in public entries, so lambda_eff ~ sqrt(2 E_gap Lambda);
+  Lambda = lam_h1 + lam_h2, lam_h2 = 291.7 on the best public factor. Replacing sum|w_b| by the nuclear norm of
+  each X_rc (best possible re-representation of the same X) only saves 4.2%: real gains need a new
+  factorization (CPU optimisation on this host; no GPU).
