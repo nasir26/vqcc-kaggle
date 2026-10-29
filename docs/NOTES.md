@@ -195,3 +195,11 @@ then dfthcsos refit after downloading the starter-kit trainer.
   (data/fg12/). Value if found: every multiplier in the decoder is 42 ANDs, so rank r gives about
   (42 - r)/42 of the multiplier's share of dqi Toffolis (share still to be measured).
 - v1 public LB score 22.77459 (2026-10-29): equals our local salt-'' value with dqi at 0 failures, so the harness predicts the LB exactly.
+- Literature/forum sweep 2026-10-29 (forum threads saved in data/forum/, via KaggleApi.competition_list_topic_messages):
+  * arXiv 2502.15882 (spectrum amplification, DFTHC): FeMoco-76 at (R,B,C) = (15,57,19), Lambda 179.7, lambda_eff 43.65,
+    but eps_fro 82.5 mHa (4x the competition's 20 mHa gate): not transferable.
+  * Forum 753633: with the verifier's fixed S, beta_1, lambda_eff >= 46.79 for any factorization (public 48.70):
+    chemistry gains must come from T x Q. Forum 753185 (+manwithacat): Eckart-Young floor R*C >= 290 at 20 mHa;
+    brot 7 and re-rounding fail; 72.3% of a BM decoder's Toffolis are 42-AND GF multiplies; invsqrt is precision-
+    saturated everywhere (rotations cannot be cheapened); 63 -> 62 qubits closed by manwithacat.
+  * arXiv 2610.22367 (Gu et al.): BM decoder ~440k Toffolis but ~1,837 qubits: worse than the public 897Q.
