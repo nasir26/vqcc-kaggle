@@ -230,3 +230,14 @@ then dfthcsos refit after downloading the starter-kit trainer.
   parked as low expected value (rank 41 = ~1% of dqi T).
 - dqi zero_hold (9.2%) = the Chien scan's 12-bit zero test (11 ANDs x ~4,025 calls); not prunable: a test on fewer
   bits gives ~4,060 x 2^-k false positives per shot.
+- Copy pruning at fixed angle words (tasks/dfthcsos/prune_copies.py; exact eps_2 formula matches the official
+  verifier to 1e-4 mHa): min eps_2 over all weights C=60 19.767, C=56 21.70, C=52 24.91, C=48 30.78, C=44 38.19,
+  C=40 48.70 mHa. Infeasible: the public factor is error-saturated (0.23 mHa slack). Fewer copies needs new vectors,
+  i.e. new lookup circuits, and the forum reports capacity limits there. Closed.
+- Triage of the user's two planning documents (kickmix attack plan, literature map) against the
+  verified public frontier: invsqrt ideas A-E already realised (63Q table circuit, margin 0.9993); dqi in-place
+  solver (Q 897 vs floor 840), CZ-folded phase (field.phase_product is Clifford) and tower inverses are already in the
+  public decoder; additive-FFT root search would replace CNOT-only Chien updates by 42-AND multiplies (worse); chem
+  QAT, tree reordering and Lambda regularisation measured null publicly (forum 753185/753633); per-edge precision is
+  not representable in the cost formula (one brot). Still open: lower-rank GF(2^12)/GF(2^24) multipliers, rare-event
+  reserve sizing [4.8] for any new dqi design, structural dqi redesign.
