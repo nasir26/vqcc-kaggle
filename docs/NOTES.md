@@ -219,3 +219,8 @@ then dfthcsos refit after downloading the starter-kit trainer.
 - Chemistry shapes from the Gluzdov dataset, exact heuristic part (verifier formulas): THC (1,496,384) brot 10:
   572 addresses but T_h 11,010 and temp 640; (32,60,30) brot 10: T_h 6,411, temp 542; R4 (4,303/333,128) brot 8:
   T_h 13.7-14.7k. Current best (8,143,60) brot 8: T_h 7,930, temp 304 (+ lookups 8,366). None beats it as is.
+- Exact dqi failure exchange rate (Clopper-Pearson, delta 2^-128, N 102,400; matches forum values): each
+  tolerated failure costs k=1 +0.46%, k=2 +0.85%, k=5 +1.83%, k=10 +3.17%, k=20 +5.33%, k=50 +10.25% of dqi
+  cost; one failure ~ 2 qubits ~ 2,000 Toffolis. Q floor is 840 (syndrome), public is 897: at most 57 workspace
+  qubits (Q^2: <= 1.14x) are left, so dqi gains must mainly come from T. "Budget for the typical case" (Gu et al.)
+  pays only where it removes > ~1,400 Toffolis or ~1.4 qubits per tolerated failure.
