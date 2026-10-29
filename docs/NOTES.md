@@ -194,3 +194,4 @@ then dfthcsos refit after downloading the starter-kit trainer.
   known optimum 15 in 14 of 64 long walks. Launched GF(2^12), modulus 4179, target <= 41, 200 seeds x 3 h
   (data/fg12/). Value if found: every multiplier in the decoder is 42 ANDs, so rank r gives about
   (42 - r)/42 of the multiplier's share of dqi Toffolis (share still to be measured).
+- v1 public LB score 22.77459 (2026-10-29): equals our local salt-'' value with dqi at 0 failures, so the harness predicts the LB exactly.
