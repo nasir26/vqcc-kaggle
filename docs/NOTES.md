@@ -210,3 +210,12 @@ then dfthcsos refit after downloading the starter-kit trainer.
   cyclic coordinate shift), every move applied per orbit. GF(2^6): reaches the optimum 15 in 90 s under groups of
   order 2, 3 and 6 (plain flip graph: 14/64 runs in 180 s). GF(2^12): 48 walks x groups of order 2,3,4,6,12,
   3 h, target <= 41 (data/fs12/). Plain flip graph from the rank-42 scheme found nothing below 42.
+- dqi attribution (tasks/dqi/attribute_somejoint.py, user allowed running the public generator): somejoint 897Q,
+  T_static 444,667, 480,015 AND-type calls. GF(2^12) tensor(12) multipliers (rank 42): field.mul_xor0 37.5% +
+  field.mul_xor 2.7% (+ part of noscratch.rankone_xor 10.0%). GF(2^24) multiplier mul99 (degree 6 over GF(16),
+  11 points x 9 = rank 99): 25.4%. zero_hold 9.2%, phase_classical_parity 5.9%. So one AND less in the 12-bit table
+  is worth ~1% of dqi T, one less in the 24-bit table ~0.26%. mul_xor0 assumes symmetric masks (same form on x and
+  y); a general scheme needs separate pivots (mechanical change).
+- Chemistry shapes from the Gluzdov dataset, exact heuristic part (verifier formulas): THC (1,496,384) brot 10:
+  572 addresses but T_h 11,010 and temp 640; (32,60,30) brot 10: T_h 6,411, temp 542; R4 (4,303/333,128) brot 8:
+  T_h 13.7-14.7k. Current best (8,143,60) brot 8: T_h 7,930, temp 304 (+ lookups 8,366). None beats it as is.
