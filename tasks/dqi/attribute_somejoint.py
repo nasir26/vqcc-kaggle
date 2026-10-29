@@ -18,7 +18,11 @@ sys.path.insert(0, f'{data}/kickmix')
 import kickmix as km  # noqa: E402
 
 sys.modules['circ'] = km
-inner, field = collections.Counter(), collections.Counter()
+inner, field, stage = collections.Counter(), collections.Counter(), collections.Counter()
+STACK = []
+LIVE = [0]
+peak = collections.defaultdict(int)
+low = {}
 FIELD = 'arithmetic/field.py'
 
 
@@ -28,11 +32,39 @@ class Proxy:
 
     def __getattr__(self, name):
         f = getattr(self._b, name)
+        if name == 'mark':
+            import contextlib
+
+            @contextlib.contextmanager
+            def marked(label, *a, **k):
+                STACK.append(label)
+                with f(label, *a, **k):
+                    yield
+                STACK.pop()
+            return marked
+        if name in ('alloc_qubits', 'free'):
+            def counted(*a, **k):
+                r = f(*a, **k)
+                if name == 'alloc_qubits':
+                    LIVE[0] += int(a[0]) if a else int(k.get('n', 1))
+                else:
+                    x = a[0]
+                    try:
+                        n = sum(1 for q in x if isinstance(q, km.q))
+                    except TypeError:
+                        n = 1 if isinstance(x, km.q) else 0
+                    LIVE[0] -= n
+                lab = '/'.join(STACK[:1]) or '(no mark)'
+                peak[lab] = max(peak[lab], LIVE[0])
+                low[lab] = min(low.get(lab, LIVE[0]), LIVE[0])
+                return r
+            return counted
         if name not in ('init_and', 'ccx', 'cswap'):
             return f
 
         def wrapped(*a, **k):
             st = [fr for fr in traceback.extract_stack()[:-1] if fr.filename.startswith(src)]
+            stage['/'.join(STACK) or '(no mark)'] += 1
             if st:
                 last = st[-1]
                 inner[f'{last.filename[len(src):].lstrip("/")}:{last.name}'] += 1
@@ -56,6 +88,12 @@ c = raw.finish_circuit()
 tot = sum(inner.values())
 print(json.dumps({'Q': c.num_qubits, 'T_static': c.operation_statistics().num_toffoli_like,
                   'counted_calls': tot, 'build_s': round(time.time() - t0)}))
+print('--- by decoder stage (b.mark)')
+for k, v in stage.most_common(30):
+    print(f'{v:9d} {100 * v / tot:5.1f}%  {k}')
+print('--- live qubits (excluding the 840 syndrome qubits) per top-level stage: min .. peak')
+for k in peak:
+    print(f'{k:20s} {low[k]:5d} .. {peak[k]:5d}')
 print('--- by outermost field.py routine on the stack')
 for k, v in field.most_common(20):
     print(f'{v:9d} {100 * v / tot:5.1f}%  {k}')

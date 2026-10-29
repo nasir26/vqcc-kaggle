@@ -241,3 +241,10 @@ then dfthcsos refit after downloading the starter-kit trainer.
   QAT, tree reordering and Lambda regularisation measured null publicly (forum 753185/753633); per-edge precision is
   not representable in the cost formula (one brot). Still open: lower-rank GF(2^12)/GF(2^24) multipliers, rare-event
   reserve sizing [4.8] for any new dqi design, structural dqi redesign.
+- dqi stage breakdown (somejoint 897Q, AND-type calls, attribute_somejoint.py with b.mark tracking): extract ~64k,
+  unextract ~166k (2.6x: the reverse measures out each chain's D and repairs its phase by replaying the scalar
+  steps forward and back), synthesis 33k / unsynthesis 54k, convert 56k / unconvert 58k, scan 44k.
+  Live workspace above the 840 syndrome qubits peaks at 57 in extract, convert, unconvert, unsynthesis and
+  unextract (scan 30, synthesis 49). Holding D instead of replaying would carry it through convert (at the peak):
+  base chain 12 qubits (~12k T-eq at ~990 T per qubit) vs ~2.9k replay; external groups 24 qubits (~24k) vs
+  3.2k-6.3k replay. Replay is the right trade; lever closed (consistent with forum 753185).
