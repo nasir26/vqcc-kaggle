@@ -11,7 +11,7 @@
  * When no reduction comes for `plateau` flips, a plus transition (rank + 1) moves to a different region.
  * Every scheme written is checked against the full multiplication tensor.
  *
- * usage: flipgraph N MODULUS TARGET_RANK SEED MAX_STEPS [PLATEAU] > out.txt
+ * usage: [FG_INIT=scheme.txt] flipgraph N MODULUS TARGET_RANK SEED MAX_STEPS [PLATEAU] > out.txt
  * output: one line per improvement "rank R: a,b,c a,b,c ..." (hex), verified.
  */
 #include <stdio.h>
@@ -121,9 +121,18 @@ int main(int argc, char **argv) {
     long long plateau = argc > 6 ? atoll(argv[6]) : 200000;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) T[i][j] = gfmul(1u << i, 1u << j, mod);
-    m = 0;                                         /* trivial scheme: one term per (i, j) */
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++) { A[m] = 1u << i; B[m] = 1u << j; C[m] = T[i][j]; m++; }
+    m = 0;
+    const char *init = getenv("FG_INIT");          /* start scheme: "a,b,c" hex triples, e.g. from scheme42.py */
+    if (init) {
+        FILE *f = fopen(init, "r");
+        if (!f) { perror(init); return 1; }
+        unsigned a, b, c;
+        while (m < MAXM && fscanf(f, " %x,%x,%x", &a, &b, &c) == 3) { A[m] = a; B[m] = b; C[m] = c; m++; }
+        fclose(f);
+    } else {                                       /* trivial scheme: one term per (i, j) */
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++) { A[m] = 1u << i; B[m] = 1u << j; C[m] = T[i][j]; m++; }
+    }
     cleanup();
     if (!verify()) { fprintf(stderr, "start scheme wrong\n"); return 1; }
     int best = m;
