@@ -203,3 +203,10 @@ then dfthcsos refit after downloading the starter-kit trainer.
     brot 7 and re-rounding fail; 72.3% of a BM decoder's Toffolis are 42-AND GF multiplies; invsqrt is precision-
     saturated everywhere (rotations cannot be cheapened); 63 -> 62 qubits closed by manwithacat.
   * arXiv 2610.22367 (Gu et al.): BM decoder ~440k Toffolis but ~1,837 qubits: worse than the public 897Q.
+- dmitriigluzdov/vqcc-femoco-public-factorization (Apache-2.0, 194 MB): factorizations (65x60x30, 32x60x30,
+  THC (1,496,384) lambda_eff 47.86, mrmeows R4 refits) plus circuit generator sources and archived circuit sets.
+  All 12 chemistry sets verified (salt ''): best v33 circuits + v34 weights = 9.850574 (vs our 9.836619).
+- Automorphism angle: tasks/dqi/flipsym.c searches Frobenius-invariant schemes in a normal basis (Frobenius =
+  cyclic coordinate shift), every move applied per orbit. GF(2^6): reaches the optimum 15 in 90 s under groups of
+  order 2, 3 and 6 (plain flip graph: 14/64 runs in 180 s). GF(2^12): 48 walks x groups of order 2,3,4,6,12,
+  3 h, target <= 41 (data/fs12/). Plain flip graph from the rank-42 scheme found nothing below 42.
