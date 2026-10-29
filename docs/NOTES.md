@@ -251,3 +251,4 @@ then dfthcsos refit after downloading the starter-kit trainer.
   named submission.zip; upload via data/upload/submission.zip with -c works.
 - Submitted v2 to Kaggle 2026-10-29 (user said "continue the submission"): submissions/2026-10-29_v2.zip, sha
   46f7855e..., ref 57766121.
+- v2 public LB score 22.78536 (2026-10-29): equals the local salt-'' value, as for v1.

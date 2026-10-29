@@ -14,7 +14,7 @@ is `docs/RULES.md`.
 | Version | Date | invsqrt | dqi | dfthcsos | Local GM, salt '' | Public LB |
 |---|---|---|---|---|---|---|
 | v1 | 2026-10-29 | 20.291057 | 59.183589 | 9.836619 | 22.77459 | 22.77459 |
-| v2 | 2026-10-29 | 20.291057 | 59.183589 | 9.850574 | 22.78536 | see `docs/NOTES.md` |
+| v2 | 2026-10-29 | 20.291057 | 59.183589 | 9.850574 | 22.78536 | 22.78536 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
