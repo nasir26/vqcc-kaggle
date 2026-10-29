@@ -248,3 +248,9 @@ then dfthcsos refit after downloading the starter-kit trainer.
   unextract (scan 30, synthesis 49). Holding D instead of replaying would carry it through convert (at the peak):
   base chain 12 qubits (~12k T-eq at ~990 T per qubit) vs ~2.9k replay; external groups 24 qubits (~24k) vs
   3.2k-6.3k replay. Replay is the right trade; lever closed (consistent with forum 753185).
+- portfolio_v2 = v1 invsqrt + dqi, chemistry glz_open_circuits_v33_w34 (dmitriigluzdov dataset, Apache-2.0). PASS on
+  salt '' + 8 random salts: GM 22.78536 on 7 salts, 22.75058 and 22.72115 on two (dqi failures). Note: the metric
+  rejects hardlinked files (st_nlink > 1), so candidate dirs must hold real copies. The CLI returned 400 for a zip not
+  named submission.zip; upload via data/upload/submission.zip with -c works.
+- Submitted v2 to Kaggle 2026-10-29 (user said "continue the submission"): submissions/2026-10-29_v2.zip, sha
+  46f7855e..., ref 57766121.
