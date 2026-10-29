@@ -224,3 +224,9 @@ then dfthcsos refit after downloading the starter-kit trainer.
   cost; one failure ~ 2 qubits ~ 2,000 Toffolis. Q floor is 840 (syndrome), public is 897: at most 57 workspace
   qubits (Q^2: <= 1.14x) are left, so dqi gains must mainly come from T. "Budget for the typical case" (Gu et al.)
   pays only where it removes > ~1,400 Toffolis or ~1.4 qubits per tolerated failure.
+- Multiplier search status (stopped 2026-10-29 11:20): plain flip graph from our verified rank-42 scheme, 200
+  walks x ~1 h: nothing below 42. Frobenius-symmetric flip graph from the trivial normal-basis scheme, 240 walks x
+  ~1.5 h: stalled at ranks 114-132. A symmetric start scheme near 42 (or a much stronger walk) would be needed;
+  parked as low expected value (rank 41 = ~1% of dqi T).
+- dqi zero_hold (9.2%) = the Chien scan's 12-bit zero test (11 ANDs x ~4,025 calls); not prunable: a test on fewer
+  bits gives ~4,060 x 2^-k false positives per shot.
