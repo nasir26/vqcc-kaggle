@@ -252,3 +252,12 @@ then dfthcsos refit after downloading the starter-kit trainer.
 - Submitted v2 to Kaggle 2026-10-29 (user said "continue the submission"): submissions/2026-10-29_v2.zip, sha
   46f7855e..., ref 57766121.
 - v2 public LB score 22.78536 (2026-10-29): equals the local salt-'' value, as for v1.
+- 2026-11-10 v3 = public frontier (invsqrt 5061b3bb 21.9677, dqi ddb3a087 65.2264, dfthcsos marculera c44 11.2189),
+  public LB 25.23786 = local; rank 183/2745 (33-way tie at 25.23786), silver line (top 5%) 25.2478 at that time.
+- invsqrt angle LP (tasks/invsqrt/angle_lp.py): firing pattern of all 41 rotations extracted exactly for every x in
+  one perturbed run (angle k + 2^k units of 2^-64 turns), seed independent. Margin-maximising LP over the 41 angles
+  returns the shipped margin (58,597,850 units) exactly: the public angles are already minimax optimal, with
+  hundreds of x at the minimum (equioscillation). Dropping a rotation and refitting the rest is infeasible even for
+  the smallest angle (k=15: best margin -6.0e7 units). Rotation cost is closed for this skeleton.
+- dqi conservative liveness (dead after R/HMR, SWAP exchanges status, CX/CCX with a dead control is a no-op): peak
+  892 = num_qubits, reached in ~8% of sampled points. No relabelling gain.
