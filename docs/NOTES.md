@@ -261,3 +261,9 @@ then dfthcsos refit after downloading the starter-kit trainer.
   the smallest angle (k=15: best margin -6.0e7 units). Rotation cost is closed for this skeleton.
 - dqi conservative liveness (dead after R/HMR, SWAP exchanges status, CX/CCX with a dead control is a no-op): peak
   892 = num_qubits, reached in ~8% of sampled points. No relabelling gain.
+- dfthcsos W refit at fixed words and w (tasks/dfthcsos/refit_W.py, verifier formulas reproduced exactly): SLSQP over
+  the 352 offsets W with error_1 <= 19.9 mHa gives lambda_eff 46.923535 -> 46.923355 (0.0004%). E_gap already sits
+  at its floor (3.915005 vs 3.914898), so the error_1 slack (11.26 of 20 mHa) buys nothing. Chemistry gains need new
+  loader circuits (T x Q). Closed for weights.
+- tools/scan_frontier.sh: re-runnable public frontier scan (new notebook outputs by lastRunTime, vqcc datasets),
+  stages with scan_public.py into data/cand2, scores only new members, prints best per task against portfolio_v3.
