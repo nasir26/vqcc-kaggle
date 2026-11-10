@@ -1,3 +1,5 @@
+> **Note (2026-11-09):** the code, data and reproduction scripts of this work are now maintained in [nasir26/vqcc-circuit-compilation](https://github.com/nasir26/vqcc-circuit-compilation) (currently private, to be published after review). This repository stays as it is for reference.
+
 # Verifiable Quantum Circuit Compilation (Kaggle): scoring harness, submissions and studies
 
 Work for the Kaggle competition
