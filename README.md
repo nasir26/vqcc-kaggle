@@ -17,12 +17,16 @@ is `docs/RULES.md`.
 |---|---|---|---|---|---|---|
 | v1 | 2026-10-29 | 20.291057 | 59.183589 | 9.836619 | 22.77459 | 22.77459 |
 | v2 | 2026-10-29 | 20.291057 | 59.183589 | 9.850574 | 22.78536 | 22.78536 |
+| v3 | 2026-11-10 | 21.967709 | 65.226367 | 11.218890 | 25.23787 | pending |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
 * invsqrt `e623b659`: output of the notebooks of busyaprime, kirilltym and leoprovorov.
 * dqi `c300b06e`: the SomeJoint team's 897-qubit decoder (notebook `somejoint/quantum-circuits-22-75-local-gm-897-qubit-dqi`
   and others that ship it).
+* v3 invsqrt `5061b3bb`: shipped by gengsr, alexchilton, heliosli, maoxin123 and rdaccel notebooks (Apache-2.0).
+* v3 dqi `ddb3a087`: shipped by gengsr, kirilltym, atakanaldemir, alexchilton, maoxin123, ozertuu, rdaccel notebooks.
+* v3 dfthcsos: marculera dataset `marculera/dfthc-c44-build` (Apache-2.0), DF-THC (8, 143, 44), 427 qubits, 14,928 Toffolis.
 * dfthcsos, v1 `ee1619fc`: kirilltym's exact gauge (`kirilltym/quantum-circuits-exact-gauge-5-word-qrom`).
 * dfthcsos, v2: `open_circuits_v33` circuits with `open_circuits_v34` weights from the dataset
   `dmitriigluzdov/vqcc-femoco-public-factorization`.
