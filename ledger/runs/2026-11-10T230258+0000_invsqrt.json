@@ -1,0 +1,22 @@
+{
+  "salt": "",
+  "seconds": 14.34745142236352,
+  "error": null,
+  "result": {
+    "status": "PASS",
+    "score": 97921.67849478713,
+    "toffoli_equivalent": 1579.381911206244,
+    "toffoli_count": 1281.6660275801655,
+    "max_toffoli_count": 1537,
+    "t_count": 11.500238948729708,
+    "rotation_count": 41.0,
+    "rotation_eps": 2.434041480874084e-13,
+    "num_qubits": 62,
+    "reaction_depth": 851,
+    "num_ops": 48261,
+    "verified_shots": 200540928,
+    "worst_error_over_tolerance": 0.9993237694056958,
+    "worst_x": 161,
+    "circuit_sha256": "0104d1b44d7394906c9ef1d445efbd8ca0bed8d2df833ce164e1802335f6c137"
+  }
+}

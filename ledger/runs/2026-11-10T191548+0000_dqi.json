@@ -1,0 +1,43 @@
+{
+  "salt": "67793742d0b7e7f7a375a77d98ae742f",
+  "seconds": 84.45424089208245,
+  "error": null,
+  "result": {
+    "status": "PASS",
+    "score": 1733550291174.962,
+    "m": 4095,
+    "n": 70,
+    "degree": 12,
+    "r": 2016,
+    "verified_shots": 102400,
+    "value_errors": 0,
+    "phase_errors": 6,
+    "empirical_error_rate": 5.859375e-05,
+    "effective_error_rate": 0.0010778188064556199,
+    "log2_delta": -128.0,
+    "repetition_factor": 1.2165566016754124,
+    "mean_error_weight": 31.046737331746634,
+    "toffoli_count": 445229.0,
+    "max_toffoli_count": 445229,
+    "reaction_depth": 6486,
+    "num_ops": 93898574,
+    "shot_operation_counts": {
+      "NEG": 51161,
+      "X": 22372659200,
+      "Z": 91662620650,
+      "R": 15614464000,
+      "HMR": 45198540800,
+      "CX": 7837754060800,
+      "CZ": 122162072325,
+      "SWAP": 201277440000,
+      "CSWAP": 6551040000,
+      "CCX": 39040409600,
+      "INFO_TAG": 174517452800,
+      "POP_CONDITION": 422618624000,
+      "PUSH_CONDITION": 422618624000
+    },
+    "num_qubits": 1789,
+    "num_bits": 49142,
+    "circuit_sha256": "529b075009f7758abeda83a63407f0c1feeb51dd70631ae4335dfd28721b7e08"
+  }
+}

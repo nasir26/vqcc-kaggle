@@ -267,3 +267,12 @@ then dfthcsos refit after downloading the starter-kit trainer.
   loader circuits (T x Q). Closed for weights.
 - tools/scan_frontier.sh: re-runnable public frontier scan (new notebook outputs by lastRunTime, vqcc datasets),
   stages with scan_public.py into data/cand2, scores only new members, prints best per task against portfolio_v3.
+- 2026-11-11 frontier scan (207 members, 2 malformed dfthcsos skipped): invsqrt 64b39a7d 22.1255 (alexchilton,
+  manwithacat notebooks) and dfthcsos 22b1be2a 11.2332 (maoxin123 notebook) beat v3 on every salt; dqi unchanged.
+  portfolio_v4 = those two + v3 dqi, all tasks pass on salt '' + 6 random salts, GM 25.30892 on salt '', worst salt
+  25.23761. The worst salts come from dqi ddb3a087 itself (64.93 and 64.68 on 3 of 7 salts), so the dqi member is not
+  salt stable after all; v4 is above v3 on every salt because the dqi file is identical. submissions/2026-11-11_v4.zip
+  sha cbf86a8d... Leaderboard before upload: Spinwave rank 318/2772, silver (top 5%, rank 138) 25.29376, bronze
+  (rank 277) 25.23800, top 29.301.
+- v4 uploaded 2026-11-11 (ref 58236400): public LB 25.30892 = local salt ''. Rank after scoring 331/2831; the frontier
+  moved during the day: silver (rank 141) 25.34355, bronze (rank 283) 25.31236, gold (rank 15) 26.79893, top 29.301.

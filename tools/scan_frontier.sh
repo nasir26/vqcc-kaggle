@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Scan the public frontier: download outputs of recently run competition notebooks (and recently updated
 # datasets that ship circuits), stage every new task member, score new members with the official verifiers
-# (salt '' + 2 random salts) and print the best member per task next to the current portfolio.
+# (salt '' + 2 random salts) and print the best member per task next to the current portfolio (v4).
 # Nothing is submitted. Usage (repo root): tools/scan_frontier.sh [PAGES]
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -55,7 +55,7 @@ done
 $PY -I - "$LOG" <<'EOF'
 import json, pathlib, sys
 log = pathlib.Path(sys.argv[1]); best = {}
-cur = {'invsqrt': 21.967709, 'dqi': 65.226367, 'dfthcsos': 11.218890}  # portfolio_v3
+cur = {'invsqrt': 22.125504, 'dqi': 65.226367, 'dfthcsos': 11.233227}  # portfolio_v4
 for f in log.glob('pub_*.jsonl'):
     rs = [json.loads(l) for l in f.read_text().splitlines() if '"task"' in l]
     if not rs: continue
