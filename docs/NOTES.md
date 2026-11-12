@@ -276,3 +276,34 @@ then dfthcsos refit after downloading the starter-kit trainer.
   (rank 277) 25.23800, top 29.301.
 - v4 uploaded 2026-11-11 (ref 58236400): public LB 25.30892 = local salt ''. Rank after scoring 331/2831; the frontier
   moved during the day: silver (rank 141) 25.34355, bronze (rank 283) 25.31236, gold (rank 15) 26.79893, top 29.301.
+- 2026-11-12 v5 = maoxin123 v22 public portfolio (invsqrt 9c708f7b 22.1984, dqi eae396ba 65.4275, chemistry table
+  f21b8a87 + maoxin123 4089-Toffoli loaders 11.2893): local GM 25.40483 on 6 of 7 salts (25.33323 on one dqi-failure
+  salt), submissions/2026-11-12_v5.zip sha 22a3015b..., Kaggle ref 58263457, public LB 25.40482.
+- Deep pass on the problem statement (arXiv 2610.23832). Hosts committed SHA-256 of internal best runs. DQI target is
+  only the phase (-1)^(c.bin(e(s))); c is classical, conditioned gates count only when they fire.
+- Chemistry loader anatomy (maoxin v22): per loader 75 cache Toffolis (69 high-address monomials + 6 low x gauge-bit
+  monomials) + ~193 products CCX(acc126, acc127 -> word bit) with CNOT fan-out; uncompute HMR+CZ. Reads incoming word
+  bits (reachable-state contract, forum 757522 unanswered). The clean tensor T[bit, low monomial, high block] is
+  random-like (density 0.5, slice ranks ~35/40); counting bound with free word-bit features ~150 products.
+- Chemistry shape model (official heuristic_costs + loader cost scaled by R*B): B in [129, 256] is the 303-temp-qubit
+  band (B < 129 jumps to 574). Small B (4..31) would halve Q but is infeasible: rank-b truncated double factorization
+  leaves 7-11 Ha error for any K (the leading leaves are full rank). Eckart-Young full-rank leaves: K 290 19.9 mHa, 350
+  7.6, 500 1.3. brot 7: naive rounding 392-440 mHa, weights-only refit stalls at 228 mHa: closed. R=7 needs C ~58,
+  gain ~1% only. Promising: B = 129 (fewer addresses), (8,143,40) and (7,129,40..44): model 0.87-0.94.
+- Own fit tool tasks/dfthcsos/fit/fit_shape.py (JAX f64, L-BFGS, error_2 via ||G||^2 - 2 x'Gx + sum (x'x)^2, 0.2-0.6
+  s/iter) and quantize.py (tree encoder, verified round trip). Fits from the f21b table: (8,143,40) 20.70 mHa and
+  (7,143,58) 20.67 mHa after ~5000 iterations, still falling slowly; usable needs ~18.5 continuous.
+- Public general-contract loader compiler found: dataset tayutiphetmee/vqcc-cl-chemloader-c18zzzg (anfq.py ANF +
+  paired products, build_q.py FIN.npz -> loaders); running it needs user permission (external code). Starter kit
+  trainer is in data/starter.
+- Public general-contract loader compiler (tayutiphetmee anfq, user allowed running it): loader k0 346 Toffolis vs
+  maoxin's 292 (reachable-state loaders read incoming word bits). Not competitive; the reachable-state design is the
+  one to beat.
+- tasks/dfthcsos/loader/extract.py: exact symbolic extraction of a loader into cache monomials + products over atoms
+  (const, selection, incoming word bits, cache, products); reproduces k0, k1, k5 delta tables bit for bit (k13/k14
+  differ only on gauge top bits: the circuit loads a gauge-equivalent table). maoxin products: every factor
+  distinct, fan-out ~18-20 of 40 outputs (dense basis change), k14 has nested products (uses updated word bits).
+  A formal flip graph has no shared factors to start from; a better loader needs a joint span-coverage search.
+- Fits after ~8000 L-BFGS iterations: (7,143,58) 19.60 mHa (first shape below 20 continuous), (8,143,40) 20.22,
+  (7,143,54) 20.84, (6,143,70) 24.78. Block-exact weight step (fit_als.py) is slower than plain L-BFGS: the vectors
+  are the bottleneck, not the weights.

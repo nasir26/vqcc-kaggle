@@ -55,7 +55,7 @@ done
 $PY -I - "$LOG" <<'EOF'
 import json, pathlib, sys
 log = pathlib.Path(sys.argv[1]); best = {}
-cur = {'invsqrt': 22.125504, 'dqi': 65.226367, 'dfthcsos': 11.233227}  # portfolio_v4
+cur = {'invsqrt': 22.198355, 'dqi': 65.427517, 'dfthcsos': 11.289304}  # portfolio_v5
 for f in log.glob('pub_*.jsonl'):
     rs = [json.loads(l) for l in f.read_text().splitlines() if '"task"' in l]
     if not rs: continue
