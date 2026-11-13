@@ -409,3 +409,10 @@ fingerprint.py, drop_lp.py, kmxsim.py.
 - Kaggle evaluation time: 24 min (submitted 06:07:48 UTC, complete by 06:32:18). Logged in ledger/kaggle_timing.csv; deadline 2027-01-20 23:59 UTC.
 - After v6: silver cutoff (rank 147) 27.09017, bronze (295) 27.03707, gold (15) 27.57302, top 29.90871.
 - R7 C58 norm penalised fits: mu 0.5 16.44 mHa / norm 168.7, mu 1.5 16.61 / 152.0 (current table 130.5); mu 3 and mu 5 running.
+
+## 2026-11-13 Gu, Kemeny, Yelin, Lukin (arXiv:2610.22367) repo check
+- Cloned github.com/andigu/uncompute (Apache-2.0) to data/ext/uncompute (git ignored).
+- dqi-reed-solomon discovered circuit: 442,397 Toffoli, 1,837 qubits, 7 wrong signs per 1e5. Our v6 dqi 821bf8d1 is about 383k Toffoli at 892 qubits, so on R*Q^2*T theirs is about 5x worse. The public Kaggle lineage is already far past this paper. Their scan is 23 T per position (93k); ours is about 44k total (about 11 T per position).
+- coulomb-potential: 1,140 Toffoli, 142 qubits, but a different contract (8-bit coordinates in, 25-bit accumulator out, 32-unit absolute error, i.e. about 2^-19, no phase). Our task needs 2^-24 relative error in a phase on a 22-bit input, so their 128-line piecewise linear table does not transfer as is.
+- chemistry-fe2s2: an alias-sampling state preparation task, not our angle loaders.
+- Conclusion: not the source of the leaders' 29.9; no direct gain for us.
