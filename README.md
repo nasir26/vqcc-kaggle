@@ -20,6 +20,7 @@ is `docs/RULES.md`.
 | v3 | 2026-11-10 | 21.967709 | 65.226367 | 11.218890 | 25.23787 | 25.23786 |
 | v4 | 2026-11-11 | 22.125506 | 65.226367 | 11.233227 | 25.30892 | 25.30892 |
 | v5 | 2026-11-12 | 22.198355 | 65.427517 | 11.289304 | 25.40483 | 25.40482 |
+| v6 | 2026-11-13 | 25.906979 | 67.847839 | 11.336077 | 27.11056 | 27.11056 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -35,6 +36,9 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
 * v5: the maoxin123 v22 public portfolio (Apache-2.0): invsqrt `9c708f7b` (Asterios Panoras splice on the
   manwithacat HW-25 circuit), dqi `eae396ba` (SomeJoint decoder with Atakan's GF64 inverse character patch),
   dfthcsos table `f21b8a87` (prvsiyan refit lineage) with maoxin123 v22 loaders (4,089 Toffolis per pass).
+* v6 (all Apache-2.0 notebook outputs, 2026-11-13): invsqrt `321aff83` (shipped by areebbb, ozertuu,
+  kirilltym, maoxin123 v25 and prvsiyan notebooks), dqi `821bf8d1` (areebbb `qai-fewer-toffolis-same-qubits-lb-27-08903`),
+  dfthcsos `f90d6c66` (prvsiyan `verifier-guided-quantum-circuit-optimization`).
 * dfthcsos, v1 `ee1619fc`: kirilltym's exact gauge (`kirilltym/quantum-circuits-exact-gauge-5-word-qrom`).
 * dfthcsos, v2: `open_circuits_v33` circuits with `open_circuits_v34` weights from the dataset
   `dmitriigluzdov/vqcc-femoco-public-factorization`.

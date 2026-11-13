@@ -307,3 +307,105 @@ then dfthcsos refit after downloading the starter-kit trainer.
 - Fits after ~8000 L-BFGS iterations: (7,143,58) 19.60 mHa (first shape below 20 continuous), (8,143,40) 20.22,
   (7,143,54) 20.84, (6,143,70) 24.78. Block-exact weight step (fit_als.py) is slower than plain L-BFGS: the vectors
   are the bottleneck, not the weights.
+
+## 2026-11-12 — invsqrt track: anatomy of 9c708f7b and measured nulls (no gain)
+
+Member under study: data/candidates/portfolio_v5/invsqrt.kmb (9c708f7b, 22.198355 salt '', 22.19836-22.19837 on 7 salts
+in ledger). Scratch: data/work/invsqrt_track/. New tools in tasks/invsqrt/: screen.py (official checks + exact cost on
+~100k shots x 4 seeds in ~1 s, reproduces margin 58,597,851 and ratio 22.199), profile_kmx.py, liveness.py,
+liveexact.py, decomp.py, probe_rot.py, linspan.py, quadred.py, constprop.py, mbu_cands.py, delsearch.py, cuts.py,
+fingerprint.py, drop_lp.py, kmxsim.py.
+- Cost: C = 1213.73 mean Toffolis + 295.1 (41 rotations x 28.76 T, eps 2.43e-13, + 1 T) = 1508.9; Q 62.
+- Mean Toffolis by phase: normalize 63 (20 prefix ANDs + 44 CSWAPs whose controls are XORs of thermometer bits),
+  ANF lookup 167 (256 entries, 40 outputs), stage-1 phase mux 58 (15 rotations on K0-high, 6..9 bits), lookup inverse
+  and misc 39, forward arithmetic 334 (late coefficient decoder ~90, Horner ~27, 12 signed-digit rows ~176, other ~41),
+  stage-2 phase mux 76 (26 rotations), reverse arithmetic 405 (14 rows ~264 incl. conditional CCZ repairs), unlookup
+  16, denormalize 54 (48 CSWAPs). Second half 449 vs mirror estimate 453: no reverse excess once the cheap MBU unlookup
+  is counted.
+- Qubits: 62 = 22 x + 40 table outputs on [1620, 7450]; also 62 at stage 1, at [9275, 10845], at stage 2 [16520,
+  16730] and in ~40 short carry spikes in both arithmetic passes; forward multiply is 53-58 between spikes. R's low bits
+  (q32-q39, q49, q53) sit idle 15,000-21,000. No live qubit is a GF(2)-linear or 2-input-AND function of the others at
+  any plateau cut, no control is constant, no CCX clears a/b-known target (all on 8k-32k sampled shots).
+- Margin: equioscillation at exactly 58,597,850 units across even shifts sp = 0..14; large-x arithmetic uses 0.92 of
+  tol (per-segment offsets +-0.30, in-segment noise std 0.24 tol), so perfect arithmetic would save only ~19.5
+  Toffoli-eq. Rare rotations: k=14/40 fire only for x <= 255, 13/39 for x <= 1023, still each costs a full rotation.
+- Two-stream accounting: each stream pays ~10 positions of shift padding, so 41 = 33 + 8 for any split of K0 between
+  streams; only a single stream (33 rotations, about -84 Toffoli-eq incl. stage-1 mux) saves, and it needs K0-high
+  (9 bits) parked from the lookup to stage 2, i.e. +9 wires across three 62-wide regions. Not buildable on this layout.
+- Single-gate deletion search (1375 Toffoli-like gates, screen with 2 seeds): only 19 rarely executed nested-condition
+  CCZ repairs pass, total mean saving < 0.01 Toffoli; infnitycoder2009's public "edit search" output d701f267 fails
+  (652 bad shots) — their 501-x one-seed check was too weak. No newer public invsqrt beats 9c708f7b (pulled 13
+  notebooks + 6 datasets on 2026-11-12; best others 6c6a734d, a15b0d73, 3132ecab 93Q).
+- Not tried/blocked: rebuilding the lineage from scratch (my best paper estimate with kickmix init_lookup and plain
+  Gidney rows is ~100 Toffolis worse before any novelty), pair normalization (saves ~40 but needs a new table and
+  arithmetic), lookup split for Q (needs every 62 region fixed at once).
+- 2026-11-12/13 chemistry loader track (no gain shipped; portfolio_v5 dfthcsos unchanged, 11.289304):
+  * Exact dual model of the maoxin v22 loaders (data/work/chem_track/redund.py): mixed ANF part of D_k = 35 output bits
+    (bit 7 = bit 6 xor a per-word low-monomial helper, helpers s0s1,s0s2,s1s2,s0s3,s1s3 carried in the top bits) x 15
+    low monomials x 75 complete hi monomials. Products = pairs of rank-one features low (x) f sharing the fan-out f;
+    feasibility = Y (75-dim hi span) inside U = span of features. Verified on k1/k5/k8: Y in U, dim U = 2r, zero
+    redundant products (every product is needed; single or few-product replacement is impossible generically).
+  * Counting bounds: block model (5 groups of 3, relation-cut feature spaces, cross pairing) ~205-207 products on uncoded
+    loaders; maoxin has 212 (k0-3) and 189-193 on bit-0-coded loaders, i.e. within ~3% of its model. Unrestricted lows
+    (full model) count bound ~183-185, but no constructive algorithm: greedy capture needs dim U > 415, local/flip moves
+    have no shared factors (dense lows and hi forms). Incoming word bits (z) are uncorrelated with B_k (|corr| <= 0.18).
+  * Public Apache-2.0 round32 compiler (dmitriigluzdov dataset open_circuits_v41/source, vendored in
+    tasks/dfthcsos/loader/vendor_round32/) on our k1: (4,4,4,3) hyperplane layouts 224 products, five 3-groups 219
+    (pairing dies at >17 relations per group: c_A + c_B <= 34 forces sum of feature dims >= 440). Below maoxin's 212: no.
+  * Gauge: per row only global sign (word 0 + 128) plus zero-subtree words (1.5%) at fixed form; the 4-form gauge is
+    already spent on helpers. No zero-weight rows.
+  * Shape check (official heuristic_costs + loader scaling): (7,143,58) is 0.9705 of current cost at equal lambda_eff,
+    (8,143,40) 0.9798. But r7_c58_c (16.51 mHa) has 1/4 sum(sum_b|w|)^2 = 252.7 vs 130.5 for the current table: lambda
+    would rise far more than 3%; needs a norm-penalised continuation (started mu 0.5 / 1.5, data/work/chem_track/fit/).
+- Phase 2 (2026-11-13), single stream / Q / table, all measured nulls (tools tasks/invsqrt/v1span.py, anf_union.py):
+  * Free wires: in every 62-wide region the only untouched non-x wire is q23 (a shift flag) on the lookup plateau
+    [1644, 7474] and on the five long address-cleanup blocks [9779, 10829]; stage 2 and the carry spikes have 25-35
+    untouched wires, so they are not the binding regions.
+  * K0-high (stage-1) bits are GF(2)-linear in the live wires only up to cut ~9300 (5-7 of 7-8 bits at sp 0/1) and
+    in none at 10870, 12550, 14400 or 16380: the address cleanup consumes them. A single stream must therefore copy
+    ~8 bits out before 9300 and park them through [9779, 10829], where nothing is free: Q >= 70 on this layout,
+    i.e. about 70 x 1425 = 99.8k (ratio ~20.8) vs 93.6k. Erasing R's low bits (idle 15k-21k) does not reach that
+    window; Horner reordering does not touch the lookup or address-cleanup regions.
+  * Q 62 -> 58: impossible without a new lookup (40 outputs + 22 x on [1644, 7474] with one idle wire).
+  * Table synthesis: the 47 nonconstant outputs at cut 7180 need all 247 degree>=2 monomials in plain ANF, unchanged
+    by 400 random linear input maps; the public XAG's 167 ANDs is far below naive synthesis, so beating it needs a
+    real multi-output XAG/SAT minimiser (not attempted). A different normalisation (pairs) changes the table and the
+    whole arithmetic, i.e. a full new generator, estimated ~100 Toffolis worse than the lineage before novelties.
+
+## 2026-11-12/13 — dqi track: attribution of eae396ba and three mechanical levers (all closed, no candidate)
+
+- Section profile of eae396ba (tasks/dqi/phase_profile.py, static Toffoli-like): extract 58,742, synthesis 31,635,
+  convert 60,663, scan 44,275 (inside PUSH_CONDITION), unconvert 62,534, unsynthesis 40,429, unextract 103,035; total
+  401,313 static, 394,089 mean. The old "unextract 166k vs extract 64k" figure was the 897Q somejoint build (AND calls);
+  on eae the reverse excess is 44.3k (unextract) + 8.8k (unsynthesis) + 1.9k (unconvert). The current lineage already
+  uses the one-pass "companion" scalar return (R copy of N), so the remaining n_only_99 replay is the Thiele prefix
+  continuant at each group's own point (iwanttorungemma9b evidence, sections 5 and 10: structural).
+- L-register MBU idea (measure L at the start of the reverse chain, turn its products into CZ phases) is invalid:
+  N and L are syndrome words updated in place, so measuring them destroys input data that must be restored.
+- Exact-zero liveness (tasks/dqi/affine_track.py, width_tool.py; affine forms over atoms with subspace-keyed product
+  atoms): peak 892 in extract, synthesis, convert, unconvert, unsynthesis, unextract (scan 891); 913 maximal peak runs.
+- Product reuse without ancilla (tasks/dqi/pair_scan.py, product_scan.py, product_scan2.py): 0 syntactic same-control
+  pairs; 4,357 semantic AND matches but 0 usable (the second target is always read inside the window; holder-based
+  variant 962 matches, gaps 1e3 to 1e5 lines). CSWAP with both targets next HMR'd: 0 left (already rewritten).
+- Width cut by affine spill (erase a dormant wire, CX-restore it later; HMR erase with Z repayment means only the
+  restore relation is needed): 1024-bit relation search at run boundaries finds an affine restore for 301 of 913 runs
+  (extract 5/99, convert 56/164, unconvert 112/316, unsynthesis 32/100, unextract 96/233); searching 8 checkpoints in
+  each dormancy window after the run adds 0 of the 612 remaining. One dormant wire spans each section's whole chain
+  of runs, but those are pure data words with no redundant copy, so they cannot be restored. Covering 612 runs with
+  quadratic restores costs at least ~600 T (Sol-A: up to 6 products per extract run) against 883 T per qubit: closed.
+- Frontier rescan 2026-11-12 15:51: no public dqi better than eae396ba. LB 2026-11-12 10:27: silver (rank 145) 25.40784,
+  we are 25.40482 (rank 275, plateau): silver needs only about +0.036 % on dqi (~140 mean T) if nothing else moves.
+- Phase 2 (2026-11-13), unsynthesis fold division: in eae unsynthesis there are 36 inverse12 scopes. Per absorb site
+  (e.g. lines 52.30M-52.43M, 1,090 T) the division is 99 (x*conj(y), deferred mask) + ~75 (norm + 12-bit inverse) +
+  25 + 2x42 (half scalings by N^-1) + the inverse-phase repayment, about 290-310 T; the remaining ~780 T is the
+  O(i) polynomial work (42 T per coefficient). Every piece is at a known optimal rank (99, 42, 58), and the
+  "12-bit ratio 129 T" figure has no published construction (it is the Gemma lead's unverified estimate). No cheaper
+  division was found, so nothing was spliced.
+
+## 2026-11-13 v6 (public 27.11056, rank 58 of 2954)
+- The public frontier jumped overnight to a 27.002 plateau. Our three own tracks (dqi, invsqrt, chemistry loaders) found no gain over v5 (see their sections above); the frontier scan had died with the session restart, so the jump was caught late from a leaderboard screenshot.
+- Best new public members, official verifier salt '': invsqrt 321aff83 25.906979 (all new notebooks), dqi 821bf8d1 67.847839 (areebbb; c60beda8 67.829, cc0d7d25 67.787, 7cbe8ecf 67.749), dfthcsos f90d6c66 11.336077 (prvsiyan; 6b52ae43 11.335901, 6418ec8e 11.312180).
+- portfolio_v6 passes salt '' plus 6 random salts: GM 27.11056 on 5 of 7, 27.069 and 27.034 on two dqi failure salts. Zip submissions/2026-11-13_v6.zip sha c648c743..., ref 58298046, public 27.11056 = local salt ''.
+- Kaggle evaluation time: 24 min (submitted 06:07:48 UTC, complete by 06:32:18). Logged in ledger/kaggle_timing.csv; deadline 2027-01-20 23:59 UTC.
+- After v6: silver cutoff (rank 147) 27.09017, bronze (295) 27.03707, gold (15) 27.57302, top 29.90871.
+- R7 C58 norm penalised fits: mu 0.5 16.44 mHa / norm 168.7, mu 1.5 16.61 / 152.0 (current table 130.5); mu 3 and mu 5 running.
