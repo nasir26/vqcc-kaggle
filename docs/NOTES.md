@@ -416,3 +416,8 @@ fingerprint.py, drop_lp.py, kmxsim.py.
 - coulomb-potential: 1,140 Toffoli, 142 qubits, but a different contract (8-bit coordinates in, 25-bit accumulator out, 32-unit absolute error, i.e. about 2^-19, no phase). Our task needs 2^-24 relative error in a phase on a 22-bit input, so their 128-line piecewise linear table does not transfer as is.
 - chemistry-fe2s2: an alias-sampling state preparation task, not our angle loaders.
 - Conclusion: not the source of the leaders' 29.9; no direct gain for us.
+
+## 2026-11-13 v7 (public 27.28993, rank 62 of 2993)
+- Frontier moved again during the day (silver 27.270, our v6 fell to rank 308). New public members: invsqrt 4560ac0c 26.366501 (ahoirg), dfthcsos b9dbe922 11.361049 (atakanaldemir; heliosli 8711a770 11.360944, prvsiyan baa99712 11.360930 close behind). dqi unchanged (821bf8d1).
+- portfolio_v7 passes salt '' plus 6 random salts: 27.28992 on 4, 27.248 on two and 27.213 on one (dqi failure draws). Zip 4e6a79e7..., ref 58315550, public 27.28993; Kaggle scoring took 26 min.
+- After v7: silver (rank 149) 27.28983, bronze 27.11057, gold (rank 15) 27.76716, top 29.90871. v7 chemistry still uses reachable-state loaders (tools/loader_contract.py FAIL), as the user chose.

@@ -21,6 +21,7 @@ is `docs/RULES.md`.
 | v4 | 2026-11-11 | 22.125506 | 65.226367 | 11.233227 | 25.30892 | 25.30892 |
 | v5 | 2026-11-12 | 22.198355 | 65.427517 | 11.289304 | 25.40483 | 25.40482 |
 | v6 | 2026-11-13 | 25.906979 | 67.847839 | 11.336077 | 27.11056 | 27.11056 |
+| v7 | 2026-11-13 | 26.366501 | 67.847839 | 11.361049 | 27.28992 | 27.28993 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -39,6 +40,8 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
 * v6 (all Apache-2.0 notebook outputs, 2026-11-13): invsqrt `321aff83` (shipped by areebbb, ozertuu,
   kirilltym, maoxin123 v25 and prvsiyan notebooks), dqi `821bf8d1` (areebbb `qai-fewer-toffolis-same-qubits-lb-27-08903`),
   dfthcsos `f90d6c66` (prvsiyan `verifier-guided-quantum-circuit-optimization`).
+* v7: invsqrt `4560ac0c` (ahoirg `qcc-submit-verify-and-package`, Apache-2.0), dqi as v6, dfthcsos `b9dbe922`
+  (atakanaldemir `quantum-circuits-iso-gap-dqi-h5`, Apache-2.0/CC0).
 * dfthcsos, v1 `ee1619fc`: kirilltym's exact gauge (`kirilltym/quantum-circuits-exact-gauge-5-word-qrom`).
 * dfthcsos, v2: `open_circuits_v33` circuits with `open_circuits_v34` weights from the dataset
   `dmitriigluzdov/vqcc-femoco-public-factorization`.
