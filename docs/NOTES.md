@@ -421,3 +421,6 @@ fingerprint.py, drop_lp.py, kmxsim.py.
 - Frontier moved again during the day (silver 27.270, our v6 fell to rank 308). New public members: invsqrt 4560ac0c 26.366501 (ahoirg), dfthcsos b9dbe922 11.361049 (atakanaldemir; heliosli 8711a770 11.360944, prvsiyan baa99712 11.360930 close behind). dqi unchanged (821bf8d1).
 - portfolio_v7 passes salt '' plus 6 random salts: 27.28992 on 4, 27.248 on two and 27.213 on one (dqi failure draws). Zip 4e6a79e7..., ref 58315550, public 27.28993; Kaggle scoring took 26 min.
 - After v7: silver (rank 149) 27.28983, bronze 27.11057, gold (rank 15) 27.76716, top 29.90871. v7 chemistry still uses reachable-state loaders (tools/loader_contract.py FAIL), as the user chose.
+
+## 2026-11-14 v8 (public 27.29700)
+- invsqrt dcde7078 (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) 26.366542; dfthcsos 434822f8 (heliosli) 11.369874; dqi 821bf8d1. Passes salt '' + 6 random salts (27.29700, one dqi-failure salt 27.255). Ref 58332103, Kaggle scoring 28 min.

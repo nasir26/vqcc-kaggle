@@ -1,3 +1,4 @@
 ref,version,submitted_utc,scored_utc,eval_minutes,public_score,note
 58298046,v6,2026-11-13 06:07:48,2026-11-13 06:32:18,24,27.11056,scored time is first poll seeing COMPLETE (30 s polling); still PENDING at 06:23
 58315550,v7,2026-11-13 16:45:46,2026-11-13 17:11:59,26,27.28993,scored time is first 30 s poll seeing COMPLETE
+58332103,v8,2026-11-14 04:54:50,2026-11-14 05:22:34,28,27.29700,scored time is first 30 s poll seeing COMPLETE
