@@ -16,3 +16,7 @@
 | tasks/dqi/syed/retain_areebbb.py | areebbb notebook qai-fewer-toffolis-same-qubits-lb-27-08903, cell 4 (retention planner), vendored verbatim | Apache-2.0 | tasks/dqi/syed/build_variant.py (rebuilds 821bf8d1 byte for byte) |
 | extractor cutoff wrapper (in build_variant.py) | Ertugrul Ozer (ozertuu), as applied at cutoff 18 by areebbb | Apache-2.0 | build_variant.py |
 | tasks/dqi/syed/anatomy.py, dump_tensors.py, build_variant.py, tasks/dqi/flipgraph_t.c, notes/sources/syed_dqi_anatomy.md | ours (instrumentation, search) on Syed's v12 dqi source | | |
+
+* v10 dfthcsos `58ae6c0d`: unchanged bytes from the public Kaggle notebooks
+  `atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler` and
+  `mizeroluckygall/quantum-circuits-4033-chemistry-refit-guide` (Kaggle notebooks, Apache-2.0). Not ours.

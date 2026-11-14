@@ -1,0 +1,6 @@
+{
+  "salt": "f90705f74642ecd7d94682640c031351",
+  "seconds": 0.0061046406626701355,
+  "error": "ValueError: H1_I in submission.npz has shape (1,), not () with its named dimensions as in {'R': 8, 'B': 143, 'C': 44}",
+  "result": null
+}

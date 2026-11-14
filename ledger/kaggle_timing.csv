@@ -3,3 +3,4 @@ ref,version,submitted_utc,scored_utc,eval_minutes,public_score,note
 58315550,v7,2026-11-13 16:45:46,2026-11-13 17:11:59,26,27.28993,scored time is first 30 s poll seeing COMPLETE
 58332103,v8,2026-11-14 04:54:50,2026-11-14 05:22:34,28,27.29700,scored time is first 30 s poll seeing COMPLETE
 58334294,v9,2026-11-14 06:22:16,2026-11-14 06:50:24,28,27.31296,first submission with our own circuit (invsqrt 240ae447)
+58350600,v10,2026-11-14 17:27:24,2026-11-14 17:43:54,17,27.31748,v9 plus public chemistry 58ae6c0d
