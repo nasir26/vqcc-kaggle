@@ -424,3 +424,9 @@ fingerprint.py, drop_lp.py, kmxsim.py.
 
 ## 2026-11-14 v8 (public 27.29700)
 - invsqrt dcde7078 (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) 26.366542; dfthcsos 434822f8 (heliosli) 11.369874; dqi 821bf8d1. Passes salt '' + 6 random salts (27.29700, one dqi-failure salt 27.255). Ref 58332103, Kaggle scoring 28 min.
+
+## 2026-11-14 v9 (public 27.31296, rank 107 of 3019, unique score): first circuit of our own
+- invsqrt 240ae447 = dcde7078 + our decoder (7 ANDs) + our cleanup (6 banks): 1480.75 -> 1477.75 Toffolis, Q 46, angles and margin unchanged; 26.412805 (salt '' and 6 salts). Tools tasks/invsqrt/{syed_model,prove_vs_model,cleanup_*,table_*}.py; run folders runs/invsqrt/20261114-{dec7,clean7,clean6}.
+- Measured nulls: 32-row table (-566M margin), quadratic correction (cost > saving), angle LP (+0.025% margin max), loader resynthesis (our search far from ahoirg's 27+29).
+- dqi track: full anatomy of Syed v12 (notes/sources/syed_dqi_anatomy.md): 81% field multipliers (24-bit rank 99, 12-bit rank 42; 160 x 2 h flip-graph walks found nothing lower); scan 11 T/point; 889 = 840 + 49 with 99 peak sites. Builder tasks/dqi/syed/build_variant.py reproduces 821bf8d1 byte for byte. No gain.
+- Kaggle scoring 28 min. After v9: silver (rank 150) 27.297, gold (rank 16) 28.027, top 29.909.

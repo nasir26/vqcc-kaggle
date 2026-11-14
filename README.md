@@ -23,6 +23,7 @@ is `docs/RULES.md`.
 | v6 | 2026-11-13 | 25.906979 | 67.847839 | 11.336077 | 27.11056 | 27.11056 |
 | v7 | 2026-11-13 | 26.366501 | 67.847839 | 11.361049 | 27.28992 | 27.28993 |
 | v8 | 2026-11-14 | 26.366542 | 67.847839 | 11.369874 | 27.29700 | 27.29700 |
+| v9 | 2026-11-14 | 26.412805 | 67.847839 | 11.369874 | 27.31296 | 27.31296 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -43,6 +44,11 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
   dfthcsos `f90d6c66` (prvsiyan `verifier-guided-quantum-circuit-optimization`).
 * v7: invsqrt `4560ac0c` (ahoirg `qcc-submit-verify-and-package`, Apache-2.0), dqi as v6, dfthcsos `b9dbe922`
   (atakanaldemir `quantum-circuits-iso-gap-dqi-h5`, Apache-2.0/CC0).
+* v8: invsqrt `dcde7078` (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) and dfthcsos
+  `434822f8` (heliosli), Apache-2.0.
+* v9: **our invsqrt `240ae447`**: dcde7078 with our address decoder (7 ANDs instead of 8, exhaustive search over
+  decode orders) and our table cleanup (6 product banks instead of 8, exhaustive bank search in a changed GF(2)
+  basis), proved exact on all 3,133,452 inputs and HMR transcripts (runs/invsqrt/20261114-clean6). Chemistry and dqi as v8.
 * dfthcsos, v1 `ee1619fc`: kirilltym's exact gauge (`kirilltym/quantum-circuits-exact-gauge-5-word-qrom`).
 * dfthcsos, v2: `open_circuits_v33` circuits with `open_circuits_v34` weights from the dataset
   `dmitriigluzdov/vqcc-femoco-public-factorization`.

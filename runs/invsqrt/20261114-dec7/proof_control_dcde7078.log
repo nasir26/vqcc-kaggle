@@ -1,0 +1,13 @@
+{
+ "circuit": "data/candidates/portfolio_v8/invsqrt.kmb",
+ "circuit_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2",
+ "status": "PASS_EXACT_ALL_INPUTS_ALL_HMR_TRANSCRIPTS_VS_OUR_MODEL",
+ "proved_inputs": 3133452,
+ "chunks": 48,
+ "model64_sha256": "fa8a899c93f028942d3461d92b5fdacf590d5e139ffac4b243b07132a99af14e",
+ "model_min_margin_units64": 116320642,
+ "model_argmin_x": 2690466,
+ "checker_sha256": "5c8ac00c902d6d202bf2cb1cde47a8014047482876e356a0741c11c85e171220",
+ "checker_modulus": "2^64",
+ "seconds": 3.5
+}

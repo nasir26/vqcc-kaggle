@@ -1,0 +1,14 @@
+   78389  20.4% peakQ 889  emit_key_closing :: first3_retained_norm_adapter.emit_closing
+   73122  19.0% peakQ 889  emit_key_prefix :: first3_retained_norm_adapter.emit_prefix
+   54786  14.3% peakQ 889  finish_outer_seam.outer_closing_with_inverse :: transpose14_core.emit
+   53880  14.0% peakQ 889  transpose_handoff_outer.emit_prefix :: transpose14_core.emit
+   44286  11.5% peakQ 875  adaptive_gauge64.emit_scan :: 
+   37230   9.7% peakQ 889  emit_key_closing :: fused_crt_synthesis.emit_closing
+   27846   7.3% peakQ 889  emit_key_prefix :: fused_crt_synthesis.emit_prefix
+    6077   1.6% peakQ 889  projective_finish_infinity3.emit_closing_keep_inverse :: 
+    2856   0.7% peakQ 877  transpose_handoff_outer.emit_prefix :: tower_inverse.xor_product
+    2856   0.7% peakQ 877  finish_outer_seam.outer_closing_with_inverse :: tower_inverse.xor_product
+    1752   0.5% peakQ 889  projective_finish_infinity3.emit_prefix :: 
+     177   0.0% peakQ 889  emit_key_closing :: scalar_seed_padded.close_padded
+     173   0.0% peakQ 887  finish_outer_seam.outer_closing_with_inverse :: paired_phase62.multiply_closing
+     149   0.0% peakQ 889  transpose_handoff_outer.emit_prefix :: paired_phase62.divide_prefix

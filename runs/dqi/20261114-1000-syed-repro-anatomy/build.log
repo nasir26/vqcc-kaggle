@@ -1,0 +1,4 @@
+built: Q 889, static T 383655, 284s
+retention: {'duplicate_pairs': 5938, 'pairs_considered': 5938, 'hosted': 241, 'hops': 0, 'on_extra': 0, 'extra_qubits': 0, 'toffolis_saved': 241, 'new_bits': 241}
+retained: Q 889, static T 383414
+WROTE /home/qacc/jsc_revision_2026/vqcc_kaggle/repo/data/work/dqi_gen/out/base18ret.kmb sha256 821bf8d157c03c3e868a0099b0ab1438cfba664ab1bc6fec3210654099b672a3 total 412s

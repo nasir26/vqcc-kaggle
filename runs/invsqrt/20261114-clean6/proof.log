@@ -1,0 +1,13 @@
+{
+ "circuit": "runs/invsqrt/20261114-clean6/invsqrt.kmb",
+ "circuit_sha256": "240ae44788e93cd1629056243f1a6dae61dd3791e3fec64661f7a9e7d035201f",
+ "status": "PASS_EXACT_ALL_INPUTS_ALL_HMR_TRANSCRIPTS_VS_OUR_MODEL",
+ "proved_inputs": 3133452,
+ "chunks": 48,
+ "model64_sha256": "fa8a899c93f028942d3461d92b5fdacf590d5e139ffac4b243b07132a99af14e",
+ "model_min_margin_units64": 116320642,
+ "model_argmin_x": 2690466,
+ "checker_sha256": "5c8ac00c902d6d202bf2cb1cde47a8014047482876e356a0741c11c85e171220",
+ "checker_modulus": "2^64",
+ "seconds": 3.5
+}

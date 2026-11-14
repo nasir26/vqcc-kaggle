@@ -51,3 +51,12 @@
   64715b8c, full-domain proof PASS, official ratio 26.381944 on salt '' and 26.381935..26.381964 on 6 random salts (runs/invsqrt/20261114-dec7).
 - S4 rebuild (2 ANDs at coefficient inverse): no one-AND form with L over the plan wires plus any 12 extra live wires (sampled 2048 inputs). Closed for now.
 - Width-forced conditional recomputations in coefficient and divider inverse rows (0.5 each) need a free lane at 46-live peaks: none.
+
+## 2026-11-14 invsqrt table cleanup re-optimised: 8 -> 6 ANDs (240ae447, 26.412805)
+- Cleanup model (ours): obligations as 7-bit address functions; free payment iff in Q(live); reverse-time closure is monotone.
+  Exhaustive bank-set search: original basis 7 feasible / 6 not; random address bases: 6 feasible (seed 2), 5 none in 400 bases.
+- clean7 (4b1835cd) 26.397375; clean6 (240ae447) 1477.75 Toffolis, proof PASS, official '' 26.412805, 6 salts 26.412794..26.412832.
+- Loaders (27 + 29 ANDs, width cap 20): our quick unconstrained beam MC estimate still misses 8 output dimensions after 39 ANDs,
+  far above ahoirg's engine; a competitive loader resynthesis needs a real multi-output XAG search plus re-emission of all loader
+  debts into the cleanup. Not attempted further.
+- Multiplier search on Syed's own tensors (tasks/dqi/flipgraph_t.c, target tensor read from the start scheme): 160 walks x 2 h on GF(2^24) rank 99 and 32 x 2 h on GF(2^12) rank 42, nothing lower. Frobenius-symmetric GF(2^24) walks from the trivial 576-term scheme are far too slow (575 after 4 min). Day result: no dqi candidate beats 821bf8d1; best remains 821bf8d1 (reproduced byte for byte by build_variant.py). Run record: runs/dqi/20261114-1000-syed-repro-anatomy/.

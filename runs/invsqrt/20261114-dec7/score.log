@@ -1,0 +1,14 @@
+{"salt": "", "task": "invsqrt", "pass": true, "cost": 78719.5298373211, "ref_cost": 2076774.233715282, "ratio": 26.381944074196934, "seconds": 33.6, "error": null}
+{"salt": "ec5a85af0fb7e8143cfa91102dc43b04", "task": "invsqrt", "pass": true, "cost": 78719.47533993691, "ref_cost": 2076774.233715282, "ratio": 26.381962338380426, "seconds": 34.0, "error": null}
+{"salt": "3dca7bf34f3f6225d5a9d0f013ae56c8", "task": "invsqrt", "pass": true, "cost": 78719.51507926633, "ref_cost": 2076774.233715282, "ratio": 26.381949020189996, "seconds": 22.5, "error": null}
+{"salt": "9386e5a1530c6dab247313f248876795", "task": "invsqrt", "pass": true, "cost": 78719.4920665275, "ref_cost": 2076774.233715282, "ratio": 26.381956732649602, "seconds": 26.7, "error": null}
+{"salt": "c866ff01b2b1a3ddad08fcca2e6f3ff7", "task": "invsqrt", "pass": true, "cost": 78719.55778630915, "ref_cost": 2076774.233715282, "ratio": 26.38193470741871, "seconds": 24.7, "error": null}
+{"salt": "282a99a8d592eef3c880116969a3bb8f", "task": "invsqrt", "pass": true, "cost": 78719.46891111456, "ref_cost": 2076774.233715282, "ratio": 26.381964492929374, "seconds": 23.7, "error": null}
+{"salt": "901ed4580f051fd07b37d3e4070173b6", "task": "invsqrt", "pass": true, "cost": 78719.52622252781, "ref_cost": 2076774.233715282, "ratio": 26.38194528565334, "seconds": 24.9, "error": null}
+{"salt": "", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "ec5a85af0fb7e8143cfa91102dc43b04", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "3dca7bf34f3f6225d5a9d0f013ae56c8", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "9386e5a1530c6dab247313f248876795", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "c866ff01b2b1a3ddad08fcca2e6f3ff7", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "282a99a8d592eef3c880116969a3bb8f", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+{"salt": "901ed4580f051fd07b37d3e4070173b6", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}

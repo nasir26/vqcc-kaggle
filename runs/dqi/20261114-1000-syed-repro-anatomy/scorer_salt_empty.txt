@@ -1,0 +1,6 @@
+{"salt": "", "task": "dqi", "pass": true, "cost": 360209905486.0156, "ref_cost": 24439463583672.93, "ratio": 67.8478387502915, "seconds": 52.3, "error": null}
+{"salt": "", "geometric_mean": null, "note": "needs all 3 tasks passing at stress 1"}
+
+real	0m54.448s
+user	3m10.808s
+sys	0m11.366s

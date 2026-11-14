@@ -1,0 +1,2 @@
+821bf8d157c03c3e868a0099b0ab1438cfba664ab1bc6fec3210654099b672a3  data/work/dqi_gen/out/base18ret.kmb
+821bf8d157c03c3e868a0099b0ab1438cfba664ab1bc6fec3210654099b672a3  data/candidates/portfolio_v6/dqi.kmb

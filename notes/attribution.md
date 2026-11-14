@@ -10,6 +10,7 @@
 | invsqrt 4560ac0c, K=6 table fork (patch_k6.py, k6data.json, fork.py) | Ali Haydar Ozdag (ahoirg), kernel qcc-invk6-k6c, on Syed's generator | Apache-2.0 | reference for the next invsqrt step; not yet built here |
 | invsqrt dcde7078 | alexchilton v151 (angle refit of the K=6 skeleton), shipped by heliosli | per source | portfolio_v8 |
 | invsqrt 64715b8c (runs/invsqrt/20261114-dec7) | dcde7078 + our 7-AND address decoder | Apache-2.0 lineage (Syed, ahoirg) | candidate |
+| invsqrt 240ae447 (runs/invsqrt/20261114-clean6) | 64715b8c + our 6-AND table cleanup | Apache-2.0 lineage | best candidate |
 | invsqrt e0db1ac7 | Ertugrul Ozer angle refit of ahoirg's K=6 build | Apache-2.0 | not used |
 | tools/loader_contract.py, tasks/*/ tools (incl. tasks/invsqrt/syed_model.py, syed_profile_build.py, syed_prof_report.py, k6_angle_lp.py) | ours | | |
 | tasks/dqi/syed/retain_areebbb.py | areebbb notebook qai-fewer-toffolis-same-qubits-lb-27-08903, cell 4 (retention planner), vendored verbatim | Apache-2.0 | tasks/dqi/syed/build_variant.py (rebuilds 821bf8d1 byte for byte) |
