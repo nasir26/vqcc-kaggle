@@ -88,3 +88,48 @@ rounding: our C58 16.44 mHa fit rounds to 184 mHa (official evaluate_words), wei
 public ledger NR-0236 killed (7,143,50) for the same reason (needs continuous <= ~13.5 mHa given 14-17 mHa rounding
 noise). R7 C50-C54 fits reach only 18.5-22 mHa continuous. Tool added: tasks/dfthcsos/fit/build_words.py (fit -> full
 table -> official metrics). No candidate.
+
+## 2026-11-17 invsqrt micro-shave search on public efd84ca5 (44 Q) [ours]: null
+Tools (ours): tasks/invsqrt/sim_phase.py (exact per-x phase over all 3,133,452 x via the official simulator, HMR
+independence by repeated seeds), v27_angles.py (exact angle rewrite of the 33 sites), v27_lp_core.py, v27_angle_lp.py,
+v27_cands.py, v27_addswap.py, v27_swap.py, prove_vs_model_ang.py; data in data/work/inv_gen/v27/.
+* Exact margin 31,789,811 (x = 232688); worst x uses 98.6% of tol; 32 to 34 equioscillating x.
+  Site features measured exactly by perturbation (W_efd.npy, all 0/1, HMR independent). They are NOT the dcde
+  r-bit features (dcde-feature model margin 11.97M, agrees on 64% of x): maoxin's 44 Q arithmetic differs.
+  Syed's symbolic checker refuses this circuit (HMR-dependent fractional phase at op 12434, a conditioned CS block),
+  so proofs for this lineage need the simulator route.
+* Angle LP on the exact features: +2 units (31,789,813), i.e. efd84ca5's angles are already LP optimal.
+* Extra constant column: 33.59M; best extra feature over 6,186 deduplicated wire values at depth-0 points: 64.6M,
+  but a 34th rotation needs >= ~93M to pay (cost 74,912 > 74,797). True swap of any site for any candidate
+  (with or without complement, angle near a_i or near 0): best = base, no strict gain.
+* Width: 44 live at 4,021 of 15,480 depth-0 points over 79 runs spanning the datapath; only 77 of those points have
+  any GF(2) affine dependency among live wires, so no free CX lane; Q 43 needs < ~39 extra Toffoli-eq, not found.
+* Toffoli peephole: none of 1,369 depth-0 and 191 conditioned Toffolis has a constant control, equal or complementary
+  controls, a zero product, or (depth 0) a target equal to the product (8,192 sampled x).
+* T-level gates (t_base 2.5): one T on an AND product (needed exactly) and one conditioned CS block (1.5 T at 50%,
+  cheaper than a CCZ). Decoder 7 ANDs (our dcde exhaustive search says 7 is minimal if the table wires match).
+Remaining lead, not attempted: a 3 Toffoli-like cleanup (efd uses 2 CCZ + 2 CCX on the kept decoder product), worth
+at most about 1 Toffoli (44 cost, 0.06% on invsqrt), needs porting cleanup_extract/exh to this layout.
+
+## 2026-11-17 invsqrt efd84ca5: decoder + cleanup lower bounds (lead b) [ours]: null, efd is optimal in our model
+Tools (ours): tasks/invsqrt/v27_dec_compare.py, v27_dec_search.py, oneand128.c, firstprod.c (decoder);
+v27_cleanup_full.py, v27_cleanup_space.py, v27_idx_model.py, v27_seed_search.py, v27_seed2.py, v27_ccz_seeds.py,
+v27_p1_probe.py, v27_p1_fast.py (cleanup). Entry data data/work/inv_gen/v27/cleanup_efd.json (cleanup_extract on
+efd kmx 18183..19526; the shared data/work/inv_gen/cleanup.json was restored to the dcde copy).
+* efd costs: decoder 7 CCX (q21 = kept product + 6 address bits; q10's old content HMR-erased mid-block), cleanup
+  15+2 HMR erasures, only 2 *conditioned* CCZ (avg 1.0 Toffoli). The 2 CCX after HMR q21 belong to the next stage.
+* Table wires differ from dcde (10 of 19 decoder inputs shared), so the dcde minimality did not transfer; redone:
+  targets need 6 new directions modulo span(inputs) (also modulo span(inputs, q21)), and NO product L*h of two
+  input forms (all 2^20 L, exact kernel test) lands in span(inputs, targets) with a new direction. So the first AND
+  always adds a dimension outside that span: any decoder needs >= 7 ANDs. efd's 7 is optimal and its spare product
+  (q21) is kept for the cleanup at no cost.
+* Cleanup model that matches efd exactly: live functions form a subspace (CX frames move erased-output information
+  through other wires); reverse closure U <- U + (Q(U) cap V0), Q(U) = span{1, u, uv}; seeds = arbitrary vectors of
+  V0 paid by one conditioned CCZ on three live affine forms. Validated: efd's real live span after its two seeds
+  closes to all 43 dims; the plan search reproduces efd's two-CCZ plan.
+  - with q21 kept: no single seed closes (exhaustive over all 2^16 seed directions; best 29 of 43) -> 2 CCZ minimal.
+  - no kept product: no first seed payable by one CCZ; no two-CCZ plan.
+  - another kept first product P (640 random P = L*h outside span(inputs, targets)): no single seed that is both
+    payable by one CCZ and closing (0 hits).
+Remaining gap (not closed by proof): non-random P choices and decoders that keep a product of non-index wires.
+Net: no candidate; efd's 7 + 2x0.5 is the best we can find for decoder + cleanup.
