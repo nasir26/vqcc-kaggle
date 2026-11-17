@@ -31,3 +31,6 @@
   "unknown"; it credits the maoxin123 notebook, which is the source we rely on). Not ours.
 * Chemistry negative-results ledger manwithacat/vqcc-chemistry-negative-results (Apache-2.0): cited for NR-0236 and the
   8-bit rounding-noise results in runs/dfthcsos/20261117-r7c58-null.
+
+* v13 invsqrt `9a78a646`: unchanged public bytes; notebooks alexchilton/28-15-lb-which-circuits-survive-private-salt,
+  atakanaldemir/qcc-shared-products-and-controlled-refits (Kaggle, Apache-2.0). Chemistry `889999b0`: leotang09/vqcc-t7421-submission.
