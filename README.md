@@ -25,6 +25,8 @@ is `docs/RULES.md`.
 | v8 | 2026-11-14 | 26.366542 | 67.847839 | 11.369874 | 27.29700 | 27.29700 |
 | v9 | 2026-11-14 | 26.412805 | 67.847839 | 11.369874 | 27.31296 | 27.31296 |
 | v10 | 2026-11-14 | 26.412805 | 67.847839 | 11.375515 | 27.31747 | 27.31748 |
+| v11 | 2026-11-17 | 27.765339 | 70.432290 | 11.388691 | 28.13517 | 28.09222 |
+| v12 | 2026-11-17 | 27.765339 | 70.501000 | 11.388691 | 28.10134 | 28.14429 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -47,6 +49,13 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
   (atakanaldemir `quantum-circuits-iso-gap-dqi-h5`, Apache-2.0/CC0).
 * v8: invsqrt `dcde7078` (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) and dfthcsos
   `434822f8` (heliosli), Apache-2.0.
+* v12: v11 with dqi `39bddea7` (sources manwithacat hedge wizardry, maoxin123 notebooks). Chosen by a 20 salt test:
+  geometric mean 70.4087 against 70.4016 for 80ee0183, and its worst salt (70.1786) beats 80ee0183's known public
+  salt value (70.110). Public salt drew the no fail case.
+* v11: all public members: invsqrt `efd84ca5` (maoxin123 44 qubit lineage), dqi `80ee0183` (Syed v13 lineage with
+  GF24 closings), chemistry `c4391ffc` (maoxin123 4,022 Toffoli loaders). Our invsqrt shaves do not port: efd84ca5
+  already has a 7 AND decoder and a 4 AND cleanup. Measured nulls this round: dqi width floor
+  (runs/dqi/20261117-0901-width-floor) and R7 chemistry (runs/dfthcsos/20261117-r7c58-null).
 * v10: our invsqrt and dqi as v9; chemistry `58ae6c0d`, an unchanged public reproduction from the notebooks
   `atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler` and
   `mizeroluckygall/quantum-circuits-4033-chemistry-refit-guide` (Kaggle Apache-2.0); same reachable-state loader

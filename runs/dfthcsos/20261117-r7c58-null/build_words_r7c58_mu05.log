@@ -1,0 +1,10 @@
+two-body rows rounded: rms row error 0.01742
+start W: c 0.0000 lambda_eff 1286.83825 gap 957.423743
+model W fit: lambda_eff 59.62189 Lambda 333.5837 gap 5.371397 (Iteration limit reached)
+official: {'error_1': 54.9844, 'error_2': 184.4489, 'Lambda': 333.58370010129624, 'E_gap': 5.37139727468093, 'lambda_eff': 59.621885633731154, 'gap_in_domain': True}
+
+real	4m28.806s
+user	254m23.099s
+sys	0m3.201s
+
+[exited with code 0]

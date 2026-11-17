@@ -1,0 +1,6 @@
+    temporary = builder.alloc_qubits(12)
+ValueError: Attempted to allocate more qubits than the maximum.
+    allocated: 877
+    requested: 12
+    allocated+requested: 889
+    max: 880

@@ -1,0 +1,6 @@
+    quadratics = builder.alloc_qubits(8)
+ValueError: Attempted to allocate more qubits than the maximum.
+    allocated: 865
+    requested: 8
+    allocated+requested: 873
+    max: 870

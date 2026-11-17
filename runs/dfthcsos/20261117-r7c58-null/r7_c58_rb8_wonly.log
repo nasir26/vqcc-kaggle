@@ -1,0 +1,11 @@
+vectors rounded to 8 bits and frozen
+shape R 7 B 143 C 58, params 134134
+init error_2 184.4304 mHa
+  iter 50: error_2 129.3211 mHa  (28s)
+  iter 100: error_2 126.0445 mHa  (44s)
+  iter 150: error_2 124.0239 mHa  (62s)
+  iter 200: error_2 122.6455 mHa  (92s)
+  iter 250: error_2 121.5943 mHa  (109s)
+  iter 300: error_2 120.7579 mHa  (126s)
+  iter 350: error_2 120.1638 mHa  (143s)
+  iter 400: error_2 119.6758 mHa  (161s)

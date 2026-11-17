@@ -20,3 +20,14 @@
 * v10 dfthcsos `58ae6c0d`: unchanged bytes from the public Kaggle notebooks
   `atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler` and
   `mizeroluckygall/quantum-circuits-4033-chemistry-refit-guide` (Kaggle notebooks, Apache-2.0). Not ours.
+
+* dqi `80ee0183` (v11 member, analysed in runs/dqi/20261117-0901-width-floor): Syed Asad Ali v13 decoder `46446af1`
+  (Apache-2.0, dataset syed3000/vqcc-own-circuit-portfolio) with Balram Srinivasan's norm-preserving closings and
+  boristown's product-cache chains, shipped by the notebooks alexchilton/28-12-lb-which-circuits-survive-private-salt
+  and boristown/qcc-gap-3-residue-repair-and-c43-native-compiler (Kaggle, Apache-2.0). Not ours.
+* v11 dfthcsos `c4391ffc`: maoxin123 notebooks `qcc-28-14-4-022-toffoli-chemistry-loaders` and
+  `qcc-v27-a-44-qubit-invsqrt-on-the-28-09-frontier` (Kaggle notebook outputs, Apache-2.0); also re-shipped by
+  leotang09 `vqcc-t7421-submission` and the dataset ratnachand/vqcc-verified-public-floor (dataset licence field
+  "unknown"; it credits the maoxin123 notebook, which is the source we rely on). Not ours.
+* Chemistry negative-results ledger manwithacat/vqcc-chemistry-negative-results (Apache-2.0): cited for NR-0236 and the
+  8-bit rounding-noise results in runs/dfthcsos/20261117-r7c58-null.

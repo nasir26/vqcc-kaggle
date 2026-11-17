@@ -1,0 +1,6 @@
+    carry = builder.alloc_qubits(24)
+ValueError: Attempted to allocate more qubits than the maximum.
+    allocated: 840
+    requested: 24
+    allocated+requested: 864
+    max: 860

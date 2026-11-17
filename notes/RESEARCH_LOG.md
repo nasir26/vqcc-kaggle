@@ -60,3 +60,31 @@
   far above ahoirg's engine; a competitive loader resynthesis needs a real multi-output XAG search plus re-emission of all loader
   debts into the cleanup. Not attempted further.
 - Multiplier search on Syed's own tensors (tasks/dqi/flipgraph_t.c, target tensor read from the start scheme): 160 walks x 2 h on GF(2^24) rank 99 and 32 x 2 h on GF(2^12) rank 42, nothing lower. Frobenius-symmetric GF(2^24) walks from the trivial 576-term scheme are far too slow (575 after 4 min). Day result: no dqi candidate beats 821bf8d1; best remains 821bf8d1 (reproduced byte for byte by build_variant.py). Run record: runs/dqi/20261114-1000-syed-repro-anatomy/.
+
+## 2026-11-17 invsqrt: port of our dec7/clean6 shaves onto the public 44-qubit member efd84ca5 (null) [ours, analysis only]
+Member data/cand2/pub_invsqrt_efd84ca5 (file sha 0af21cb8, maoxin123 "QCC v27 a 44-qubit invsqrt" lineage): cost 74797.37,
+ratio 27.765339, Q 44, static CCX 1526 + CCZ 34 (clean6 240ae447: Q 46, static 1549). Located the address decoder by
+simulating 4096 random x and matching the six K=6 address-bit functions of dcde7078 on every wire at every depth-0 point.
+* Address decoder (body lines 17859-18158): already 7 ANDs (CCX at 17877, 17897, 17939, 17973, 18016, 18063, 18105).
+  The first product (q21) is kept alive and reused by the cleanup.
+* Table cleanup (18160-19583): 17 HMR erasures with CZ/Z phase fixups, only 2 CCZ + 2 CCX (on the kept q21 product),
+  versus 8 banks in dcde7078 and our 6 in clean6.
+Decoder plus cleanup is about 11 Toffoli-like ops here versus 13 in clean6, so neither of our edits applies; this member
+already beats them structurally. No candidate written. Remaining idea (not cheap): a 6-AND decoder that still
+supplies a reusable product to the cleanup, via the decoder_resynth search on this block's truth tables.
+
+## 2026-11-17 dqi qubit floor of 80ee0183 (Syed v13 line, 890 Q) [ours], runs/dqi/20261117-0901-width-floor
+Builder cap test on v12 (hard stops at 864, 873, 889 for caps 860, 870, 880), allocation anatomy (persistent
+864 to 866, transient inverse/lender workspace 23 to 25, peak at hundreds of sites in every stage but the scan),
+structural and value liveness on 80ee0183 (358 of 2,858 boundaries at >= 888 nonzero wires, no idle wire).
+Null for incremental qubit cuts; a cut needs a new low-workspace field inverse at every peak site on the v12 source
+(v13 builder not public; v12 starts 3.8% behind). Break-even Q <= 872 at unchanged T.
+
+## 2026-11-17 chemistry R7 shape track [ours]: null (runs/dfthcsos/20261117-r7c58-null)
+Frontier c4391ffc measured: lambda_eff 46.9217, T 14,706 (angles 8,044 = 4,022/pass, ~265 CCX per loader; heuristic
+6,662), Q 427, e1 = e2 = 20.000 mHa, E_gap on floor. Lambda_h2 is pinned by the gap floor (~1/4 sum W^2), so norm
+penalties are moot. R7 projections with frontier-quality loaders: C58 11.72, C54 11.95, C50 12.19. Blocked by 8-bit
+rounding: our C58 16.44 mHa fit rounds to 184 mHa (official evaluate_words), weights-only refit stalls at 120 mHa;
+public ledger NR-0236 killed (7,143,50) for the same reason (needs continuous <= ~13.5 mHa given 14-17 mHa rounding
+noise). R7 C50-C54 fits reach only 18.5-22 mHa continuous. Tool added: tasks/dfthcsos/fit/build_words.py (fit -> full
+table -> official metrics). No candidate.
