@@ -28,6 +28,7 @@ is `docs/RULES.md`.
 | v11 | 2026-11-17 | 27.765339 | 70.432290 | 11.388691 | 28.13517 | 28.09222 |
 | v12 | 2026-11-17 | 27.765339 | 70.501000 | 11.388691 | 28.10134 | 28.14429 |
 | v13 | 2026-11-17 | 27.853387 | 70.500950 | 11.388728 | 28.13105 | 28.17405 |
+| v14 | 2026-11-18 | 27.879537 | 70.551340 | 11.388728 | 28.18959 | 28.18957 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -50,6 +51,8 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
   (atakanaldemir `quantum-circuits-iso-gap-dqi-h5`, Apache-2.0/CC0).
 * v8: invsqrt `dcde7078` (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) and dfthcsos
   `434822f8` (heliosli), Apache-2.0.
+* v14: public invsqrt `db1404e0` (leotang09 / maoxin123 lineage), dqi `940c4516` (evgendvorkin notebook; 20 salt
+  geo mean 70.4744, worst 70.2287, both above 39bddea7), chemistry as v13. Public 28.18957, rank 269.
 * v13: public invsqrt `9a78a646` (alexchilton / atakanaldemir shared products and controlled refits lineage),
   dqi `39bddea7` as v12, chemistry `889999b0` (leotang09 T7421). Public 28.17405, rank 210, unique score.
 * v12: v11 with dqi `39bddea7` (sources manwithacat hedge wizardry, maoxin123 notebooks). Chosen by a 20 salt test:

@@ -34,3 +34,6 @@
 
 * v13 invsqrt `9a78a646`: unchanged public bytes; notebooks alexchilton/28-15-lb-which-circuits-survive-private-salt,
   atakanaldemir/qcc-shared-products-and-controlled-refits (Kaggle, Apache-2.0). Chemistry `889999b0`: leotang09/vqcc-t7421-submission.
+
+* v14 invsqrt `db1404e0` (leotang09/vqcc-t7421-submission, maoxin123/qcc-28-18-4-022-toffoli-chemistry-loaders) and dqi
+  `940c4516` (evgendvorkin/google-quantum-ai-deep-eda-with-analogies): unchanged public bytes, Kaggle notebooks, Apache-2.0.
