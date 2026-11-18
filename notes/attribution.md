@@ -37,3 +37,7 @@
 
 * v14 invsqrt `db1404e0` (leotang09/vqcc-t7421-submission, maoxin123/qcc-28-18-4-022-toffoli-chemistry-loaders) and dqi
   `940c4516` (evgendvorkin/google-quantum-ai-deep-eda-with-analogies): unchanged public bytes, Kaggle notebooks, Apache-2.0.
+
+* v15/v16 invsqrt `a0c7a668` (unchanged public bytes; found in evgendvorkin/google-quantum-ai-deep-eda-with-analogies,
+  maoxin123/qcc-28-20-4-022-toffoli-chemistry-loaders, mizeroluckygall/quantum-circuits-28-20-what-works-what-fails and
+  other notebooks) and v15 dqi `f3f2519e` (ozertuu/quantum-ai-fast-runner-starter-notebook): Kaggle notebooks, Apache-2.0.

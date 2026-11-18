@@ -9,3 +9,5 @@ ref,version,submitted_utc,scored_utc,eval_minutes,public_score,note
 58477244,v13,2026-11-17 17:33:49,2026-11-17 18:02:18,29,28.17405,invsqrt 9a78a646 + dqi 39bddea7 + chem 889999b0
 58478730,v13b,2026-11-17 18:28:58,2026-11-17 18:44:26,16,28.12193,v13 with dqi 80ee0183; private-salt hedge (public salt hits its failed shot as expected)
 58503597,v14,2026-11-18 09:30:27,2026-11-18 09:56:18,26,28.18957,invsqrt db1404e0 + dqi 940c4516 + chem 889999b0; no dqi fail on 7 local salts
+58521953,v15,2026-11-18 18:49:11,2026-11-18 19:17:12,28,28.18862,invsqrt a0c7a668 + dqi f3f2519e + chem 889999b0; dqi f3f2519e fails a shot on the public salt
+58523343,v16,2026-11-18 19:42:46,2026-11-18 20:07:38,25,28.20034,v14 with invsqrt a0c7a668

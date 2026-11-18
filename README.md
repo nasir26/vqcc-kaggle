@@ -29,6 +29,8 @@ is `docs/RULES.md`.
 | v12 | 2026-11-17 | 27.765339 | 70.501000 | 11.388691 | 28.10134 | 28.14429 |
 | v13 | 2026-11-17 | 27.853387 | 70.500950 | 11.388728 | 28.13105 | 28.17405 |
 | v14 | 2026-11-18 | 27.879537 | 70.551340 | 11.388728 | 28.18959 | 28.18957 |
+| v15 | 2026-11-18 | 27.911497 | 70.787139 | 11.388728 | 28.23174 | 28.18862 |
+| v16 | 2026-11-18 | 27.911497 | 70.551340 | 11.388728 | 28.20036 | 28.20034 |
 
 Every member is a public Apache-2.0 circuit, verified here with the official verifiers:
 
@@ -49,6 +51,9 @@ Every member is a public Apache-2.0 circuit, verified here with the official ver
   dfthcsos `f90d6c66` (prvsiyan `verifier-guided-quantum-circuit-optimization`).
 * v7: invsqrt `4560ac0c` (ahoirg `qcc-submit-verify-and-package`, Apache-2.0), dqi as v6, dfthcsos `b9dbe922`
   (atakanaldemir `quantum-circuits-iso-gap-dqi-h5`, Apache-2.0/CC0).
+* v16: v14 with public invsqrt `a0c7a668` (evgendvorkin / maoxin123 / mizeroluckygall notebooks). Public 28.20034, rank 290, bronze.
+* v15: invsqrt `a0c7a668` + dqi `f3f2519e` (ozertuu notebook; 20 salt geo 70.6399, worst 70.1904). Local 28.2317 on 5 of 7
+  salts but the public salt is a failing one for `f3f2519e`: public 28.18862. Kept as a private salt candidate.
 * v8: invsqrt `dcde7078` (alexchilton v151 angle refit of ahoirg's 64-row circuit, shipped by heliosli) and dfthcsos
   `434822f8` (heliosli), Apache-2.0.
 * v14: public invsqrt `db1404e0` (leotang09 / maoxin123 lineage), dqi `940c4516` (evgendvorkin notebook; 20 salt
