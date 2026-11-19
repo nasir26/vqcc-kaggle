@@ -1,4 +1,4 @@
-> **Note (2026-11-09):** the code, data and reproduction scripts of this work are now maintained in [nasir26/vqcc-circuit-compilation](https://github.com/nasir26/vqcc-circuit-compilation) (currently private, to be published after review). This repository stays as it is for reference.
+> **Note (2026-11-09):** the code, data and reproduction scripts of this work are now maintained in [nasir26/vqcc-circuit-compilation](https://github.com/nasir26/vqcc-circuit-compilation) (currently private, to be published after review). Active competition work (portfolios v6 to v16, frontier scans, timing ledger) continues in this repository; see notes/HANDOFF.md for the current state.
 
 # Verifiable Quantum Circuit Compilation (Kaggle): scoring harness, submissions and studies
 
